@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {RepositoryService} from '../services/repository/repository.service';
 import {UsersService} from '../services/users/users.service';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-registration',
@@ -9,14 +10,13 @@ import {UsersService} from '../services/users/users.service';
 })
 export class RegistrationComponent implements OnInit {
 
-  repeated_password = '';
   categories = [];
   formFieldsDto = null;
-  formFields : any;
-  choosen_category = -1;
+  formFields: any;
   processInstance = '';
   enumValues = [];
-  tasks : any;
+  tasks: any;
+  errorMessage = '';
 
   constructor(private userService: UsersService, private repositoryService: RepositoryService) {
 
@@ -24,22 +24,20 @@ export class RegistrationComponent implements OnInit {
 
     x.subscribe(
       res => {
-        console.log(res);
-        // this.categories = res;
         this.formFieldsDto = res;
         this.formFields = res.formFields;
         this.processInstance = res.processInstanceId;
         this.formFields.forEach( (field) => {
 
           // @ts-ignore
-          if ( field.type.name == 'enum'){
+          if ( field.type.name === 'enum'){
             // @ts-ignore
             this.enumValues = Object.keys(field.type.values);
           }
         });
       },
       err => {
-        console.log('Error occured');
+        console.log(err);
       }
     );
   }
@@ -55,19 +53,16 @@ export class RegistrationComponent implements OnInit {
       console.log(value[property]);
       o.push({fieldId : property, fieldValue : value[property]});
     }
-
-    console.log(o);
     // @ts-ignore
     const x = this.userService.registerUser(o, this.formFieldsDto.taskId);
 
     x.subscribe(
       res => {
-        console.log(res);
-
         alert('You registered successfully!');
       },
       err => {
-        console.log('Error occured');
+        console.log(err.error.message);
+        this.errorMessage = err.error.message;
       }
     );
   }
