@@ -3,10 +3,13 @@
 
     <div *ngFor="let field of formFields" >
       <label>{{field.label}}</label>
-
       <input type="text" name={{field.id}} ngModel  *ngIf="field.type.name=='string'" >
       <input type="checkbox" name={{field.id}} ngModel  *ngIf="field.type.name=='boolean'">
       <input type="number" name={{field.id}} ngModel  *ngIf="field.type.name=='long'">
+<!--      <mat-select multiple name={{field.id}} ngModel *ngIf="field.type.name=='enum'">-->
+<!--        <mat-option *ngFor="let val of enumValues" value={{val}}>{{field.type.values[val]}}</mat-option>-->
+<!--      </mat-select>-->
+
       <select name="field.id" *ngIf="field.type.name=='enum'">
         <option *ngFor="let val of enumValues" value={{val}}>
           {{field.type.values[val]}}
@@ -14,6 +17,7 @@
       </select>
     </div>
 
+    <p>{{errorMessage}}</p>
     <input type="submit">
   </form>
 
