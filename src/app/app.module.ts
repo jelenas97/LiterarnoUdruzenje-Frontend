@@ -9,6 +9,7 @@ import {RouterModule} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
 import {MatSelectModule} from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {DemoMaterialModule} from '../material-module';
 
 const Routes = [
   {
@@ -30,7 +31,10 @@ const Routes = [
         HttpClientModule,
         ReactiveFormsModule,
         MatSelectModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        HttpClientModule,
+        DemoMaterialModule,
+        ReactiveFormsModule
     ],
   providers: [],
   bootstrap: [AppComponent]
