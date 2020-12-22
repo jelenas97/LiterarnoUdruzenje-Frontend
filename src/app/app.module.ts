@@ -4,9 +4,11 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegistrationComponent } from './registration/registration.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
+import {MatSelectModule} from '@angular/material/select';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const Routes = [
   {
@@ -25,7 +27,10 @@ const Routes = [
         AppRoutingModule,
         FormsModule,
         RouterModule.forRoot(Routes),
-        HttpClientModule
+        HttpClientModule,
+        ReactiveFormsModule,
+        MatSelectModule,
+        BrowserAnimationsModule
     ],
   providers: [],
   bootstrap: [AppComponent]
