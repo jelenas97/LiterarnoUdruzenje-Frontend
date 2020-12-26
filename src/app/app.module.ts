@@ -7,6 +7,8 @@ import { RegistrationComponent } from './registration/registration.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
+import {MatSelectModule} from '@angular/material/select';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {DemoMaterialModule} from '../material-module';
 
 const Routes = [
@@ -26,6 +28,10 @@ const Routes = [
         AppRoutingModule,
         FormsModule,
         RouterModule.forRoot(Routes),
+        HttpClientModule,
+        ReactiveFormsModule,
+        MatSelectModule,
+        BrowserAnimationsModule,
         HttpClientModule,
         DemoMaterialModule,
         ReactiveFormsModule
