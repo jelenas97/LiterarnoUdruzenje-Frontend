@@ -31,6 +31,9 @@ export class RegistrationComponent implements OnInit {
         this.formFields.forEach( (field) => {
 
           if ( field.type.name === 'enum'){
+          //Ovo treba srediti
+          // @ts-ignore
+          if ( field.type.name === 'multiSelect'){
             // @ts-ignore
             this.enumValues = Object.keys(field.type.values);
           }
@@ -49,7 +52,14 @@ export class RegistrationComponent implements OnInit {
     const o = new Array();
 
     for (const property in value) {
-      o.push({fieldId : property, fieldValue : value[property]});
+      console.log(property);
+      console.log(value[property]);
+
+      if (value[property] instanceof Array) {
+        o.push({fieldId: property, fieldValues: value[property]});
+      } else {
+        o.push({fieldId: property, fieldValue: value[property]});
+      }
     }
     // @ts-ignore
     const x = this.userService.registerUser(o, this.formFieldsDto.taskId);
