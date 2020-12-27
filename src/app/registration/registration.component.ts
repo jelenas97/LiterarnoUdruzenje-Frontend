@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {RepositoryService} from '../services/repository/repository.service';
 import {UsersService} from '../services/users/users.service';
-import {FormControl} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -17,37 +18,46 @@ export class RegistrationComponent implements OnInit {
   enumValues = [];
   tasks: any;
   errorMessage = '';
+  fieldProperties = [];
+  processId: any;
 
-  constructor(private userService: UsersService, private repositoryService: RepositoryService) {
+  constructor(private userService: UsersService, private repositoryService: RepositoryService, private route: ActivatedRoute) {
 
-    const x = repositoryService.startProcess();
+    this.route.paramMap.subscribe(params => {
+      this.processId = params.get('id');
 
-    x.subscribe(
-      res => {
-        this.formFieldsDto = res;
-        this.formFields = res.formFields;
-        this.processInstance = res.processInstanceId;
-        this.formFields.forEach( (field) => {
-          //Ovo treba srediti
-          // @ts-ignore
-          if ( field.type.name === 'multiSelect'){
-            // @ts-ignore
-            this.enumValues = Object.keys(field.type.values);
-          }
-        });
-      },
-      err => {
-        console.log(err);
-      }
-    );
+      const x = repositoryService.startProcess(this.processId);
+
+      x.subscribe(
+        res => {
+          this.formFieldsDto = res;
+          this.formFields = res.formFields;
+          this.processInstance = res.processInstanceId;
+
+          console.log(this.formFields);
+
+          this.formFields.forEach( (field) => {
+
+            if (field.type.name === 'multiSelect') {
+              // @ts-ignore
+              this.enumValues = Object.keys(field.type.values);
+            }
+          });
+        },
+        err => {
+        }
+      );
+
+    });
   }
 
   ngOnInit() {
+
   }
 
   onSubmit(value, form){
     const o = new Array();
-    // tslint:disable-next-line:forin
+
     for (const property in value) {
       console.log(property);
       console.log(value[property]);
@@ -66,51 +76,8 @@ export class RegistrationComponent implements OnInit {
         alert('You registered successfully!');
       },
       err => {
-        console.log(err.error.message);
         this.errorMessage = err.error.message;
       }
     );
   }
-
-  getTasks(){
-    const x = this.repositoryService.getTasks(this.processInstance);
-
-    x.subscribe(
-      res => {
-        console.log(res);
-        this.tasks = res;
-      },
-      err => {
-        console.log('Error occured');
-      }
-    );
-  }
-
-  claim(taskId){
-    const x = this.repositoryService.claimTask(taskId);
-
-    x.subscribe(
-      res => {
-        console.log(res);
-      },
-      err => {
-        console.log('Error occured');
-      }
-    );
-  }
-
-  complete(taskId){
-    const x = this.repositoryService.completeTask(taskId);
-
-    x.subscribe(
-      res => {
-        console.log(res);
-        this.tasks = res;
-      },
-      err => {
-        console.log('Error occured');
-      }
-    );
-  }
-
 }

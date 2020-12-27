@@ -17,8 +17,8 @@ export class RepositoryService {
   }
 
 
-  startProcess(){
-    return this.httpClient.get('http://localhost:8080/registration/get') as Observable<any>;
+  startProcess(processId: string){
+    return this.httpClient.get('http://localhost:8080/registration/get/' + processId) as Observable<any>;
   }
 
   getTasks(processInstance : string){
