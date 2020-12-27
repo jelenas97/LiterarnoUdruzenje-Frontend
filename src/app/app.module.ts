@@ -13,7 +13,7 @@ import {DemoMaterialModule} from '../material-module';
 
 const Routes = [
   {
-    path: 'registrate',
+    path: 'registrate/:id',
     component: RegistrationComponent,
   }
 ];

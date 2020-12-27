@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {RepositoryService} from '../services/repository/repository.service';
 import {UsersService} from '../services/users/users.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -18,30 +19,36 @@ export class RegistrationComponent implements OnInit {
   tasks: any;
   errorMessage = '';
   fieldProperties = [];
+  processId: any;
 
-  constructor(private userService: UsersService, private repositoryService: RepositoryService) {
+  constructor(private userService: UsersService, private repositoryService: RepositoryService, private route: ActivatedRoute) {
 
-    const x = repositoryService.startProcess();
+    this.route.paramMap.subscribe(params => {
+      this.processId = params.get('id');
 
-    x.subscribe(
-      res => {
-        this.formFieldsDto = res;
-        this.formFields = res.formFields;
-        this.processInstance = res.processInstanceId;
-        this.formFields.forEach( (field) => {
+      const x = repositoryService.startProcess(this.processId);
 
-          if ( field.type.name === 'enum'){
-          //Ovo treba srediti
-          // @ts-ignore
-          if ( field.type.name === 'multiSelect'){
-            // @ts-ignore
-            this.enumValues = Object.keys(field.type.values);
-          }
-        });
-      },
-      err => {
-      }
-    );
+      x.subscribe(
+        res => {
+          this.formFieldsDto = res;
+          this.formFields = res.formFields;
+          this.processInstance = res.processInstanceId;
+
+          console.log(this.formFields);
+
+          this.formFields.forEach( (field) => {
+
+            if (field.type.name === 'multiSelect') {
+              // @ts-ignore
+              this.enumValues = Object.keys(field.type.values);
+            }
+          });
+        },
+        err => {
+        }
+      );
+
+    });
   }
 
   ngOnInit() {
