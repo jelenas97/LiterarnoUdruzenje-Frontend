@@ -10,18 +10,24 @@ import {HttpClientModule} from '@angular/common/http';
 import {MatSelectModule} from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {DemoMaterialModule} from '../material-module';
+import { WriterActivationComponent } from './writer-activation/writer-activation.component';
 
 const Routes = [
   {
     path: 'registrate/:id',
     component: RegistrationComponent,
+  },
+  {
+    path: 'activatewriter/:id',
+    component: WriterActivationComponent,
   }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    WriterActivationComponent
   ],
     imports: [
         BrowserModule,

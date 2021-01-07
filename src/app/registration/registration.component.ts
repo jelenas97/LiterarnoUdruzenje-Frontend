@@ -20,6 +20,7 @@ export class RegistrationComponent implements OnInit {
   errorMessage = '';
   fieldProperties = [];
   processId: any;
+  selectedFiles: FileList | undefined;
 
   constructor(private userService: UsersService, private repositoryService: RepositoryService, private route: ActivatedRoute) {
 
@@ -55,9 +56,11 @@ export class RegistrationComponent implements OnInit {
 
   }
 
-  onSubmit(value, form){
+  onSubmit(value, form) {
     const o = new Array();
-
+    const p = new FormData();
+    console.log(value);
+    console.log(form);
     for (const property in value) {
       console.log(property);
       console.log(value[property]);
@@ -68,16 +71,42 @@ export class RegistrationComponent implements OnInit {
         o.push({fieldId: property, fieldValue: value[property]});
       }
     }
-    // @ts-ignore
-    const x = this.userService.registerUser(o, this.formFieldsDto.taskId);
+    if (this.selectedFiles?.length !== 0 && this.selectedFiles !== undefined) {
+      // @ts-ignore
+      const x = this.userService.upload(this.selectedFiles[0], this.formFieldsDto.taskId);
+      x.subscribe(
+        res => {
+          alert('Your form is submitted succesfully!');
+          return;
+        },
+        err => {
+          this.errorMessage = err.error;
+          console.log(err);
+          alert(this.errorMessage);
+          return;
+        }
+      );
+    }
+    if (o.length !== 0) {
+      // @ts-ignore
+      const x = this.userService.registerUser(o, this.formFieldsDto.taskId);
 
-    x.subscribe(
-      res => {
-        alert('You registered successfully!');
-      },
-      err => {
-        this.errorMessage = err.error.message;
-      }
-    );
+      x.subscribe(
+        res => {
+          alert('Your form is submitted succesfully!');
+        },
+        err => {
+          this.errorMessage = err.error;
+          console.log(err);
+          alert(this.errorMessage);
+        }
+      );
+    }
+  }
+
+  selectFiles(event: Event) {
+   // @ts-ignore
+    this.selectedFiles = event.target.files;
+
   }
 }
