@@ -73,8 +73,8 @@ export class RegistrationComponent implements OnInit {
     }
     if (this.selectedFiles?.length !== 0 && this.selectedFiles !== undefined) {
       // @ts-ignore
-      const x = this.userService.upload(this.selectedFiles[0], this.formFieldsDto.taskId);
-      x.subscribe(
+      const y = this.userService.upload(this.selectedFiles, this.formFieldsDto.taskId);
+      y.subscribe(
         res => {
           alert('Your form is submitted succesfully!');
           return;
