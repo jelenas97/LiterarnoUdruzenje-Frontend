@@ -2,10 +2,12 @@
   <form #f="ngForm" (ngSubmit)="onSubmit(f.value, f)" ngNativeValidate >
 
     <div *ngFor="let field of formFields">
-      <label class="mt-4 col-lg-4 offset-lg-4 p-0 ">{{field.label}}</label>
+
+      <div class="row">
+      <label class="mt-4 col-lg-2 offset-lg-4 p-0">{{field.label}}</label>
       <input type="text" class="form-control col-lg-4 offset-lg-4" name={{field.id}} ngModel  *ngIf="field.type.name=='string'" >
-      <input type="checkbox" class="col-lg-4 offset-lg-4" name={{field.id}} ngModel  *ngIf="field.type.name=='boolean'">
-      <input type="number" class="col-lg-4 offset-lg-4" name={{field.id}} ngModel  *ngIf="field.type.name=='long'">
+      <input type="checkbox" style="margin-top: 30px; margin-left: 0px" name={{field.id}} ngModel  *ngIf="field.type.name=='boolean'">
+      <input type="number" class="col-lg-1 offset-lg-4" name={{field.id}} ngModel  *ngIf="field.type.name=='long'">
       <mat-select multiple class="form-control col-lg-4 offset-lg-4" name={{field.id}} ngModel *ngIf="field.type.name=='multiSelect'">
         <mat-option class="p-0 col-lg-4 offset-lg-4" *ngFor="let val of enumValues" value={{val}}>
           {{field.type.values[val]}}
@@ -17,9 +19,10 @@
           {{field.type.values[val]}}
         </option>
       </select>
+      </div>
     </div>
 
 
-    <input type="submit" class="btn btn-primary">
+    <input type="submit" class="col-lg-1 offset-lg-7 btn btn-primary" value="Save">
   </form>
 </div>
