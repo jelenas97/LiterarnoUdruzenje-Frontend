@@ -10,6 +10,9 @@ import {HttpClientModule} from '@angular/common/http';
 import {MatSelectModule} from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {DemoMaterialModule} from '../material-module';
+import { LoginComponent } from './login/login.component';
+import { AuthService } from './services/auth.service';
+import { HomepageComponent } from './homepage/homepage.component';
 
 const Routes = [
   {
@@ -21,7 +24,9 @@ const Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    LoginComponent,
+    HomepageComponent
   ],
     imports: [
         BrowserModule,
@@ -36,7 +41,9 @@ const Routes = [
         DemoMaterialModule,
         ReactiveFormsModule
     ],
-  providers: [],
+  providers: [
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
