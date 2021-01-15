@@ -11,6 +11,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {DemoMaterialModule} from '../material-module';
 import { WriterActivationComponent } from './writer-activation/writer-activation.component';
+import { RequestsListComponent } from './requests-list/requests-list.component';
 
 const Routes = [
   {
@@ -20,6 +21,10 @@ const Routes = [
   {
     path: 'activatewriter/:id',
     component: WriterActivationComponent,
+  },
+  {
+    path: 'requests',
+    component: RequestsListComponent,
   }
 ];
 
@@ -27,7 +32,8 @@ const Routes = [
   declarations: [
     AppComponent,
     RegistrationComponent,
-    WriterActivationComponent
+    WriterActivationComponent,
+    RequestsListComponent
   ],
     imports: [
         BrowserModule,

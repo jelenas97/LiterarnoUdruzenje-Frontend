@@ -13,4 +13,8 @@ export class CamundaService {
   public startReaderRegistrationProcess() {
     return this.httpClient.get<ProcessDto>('http://localhost:8080/registration/startReader');
   }
+
+  getUserTasks(username: string) {
+    return this.httpClient.get('http://localhost:8080/user/tasks/'.concat(username));
+  }
 }

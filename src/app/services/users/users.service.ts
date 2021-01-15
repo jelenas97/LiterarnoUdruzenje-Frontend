@@ -26,16 +26,11 @@ export class UsersService {
       .get('http://localhost:8080/registration/download/123?taskId=a8bbf359-512d-11eb-a991-b010410e0ab5') as Observable<any>;
   }
 
-  upload(files: FileList, processId: any): Observable<any> {
+  upload(files: FileList, processId: any) {
     const formData: FormData = new FormData();
     for (var i = 0; i < files.length; i++) {
       formData.append('files', files[i]);
     }
-    const req = new HttpRequest('POST', `http://localhost:8080/registration/uploadFile/`.concat(processId), formData, {
-      reportProgress: true,
-      responseType: 'json'
-    });
-
-    return this.httpClient.request(req);
+    return this.httpClient.post('http://localhost:8080/registration/uploadFile/'.concat(processId), formData) as Observable<any>;
   }
 }

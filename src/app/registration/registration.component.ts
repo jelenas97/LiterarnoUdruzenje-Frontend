@@ -39,7 +39,7 @@ export class RegistrationComponent implements OnInit {
 
           this.formFields.forEach( (field) => {
 
-            if (field.type.name === 'multiSelect') {
+            if (field.type.name === 'multiSelect' || field.type.name == 'enum') {
               // @ts-ignore
               this.enumValues = Object.keys(field.type.values);
             }
@@ -73,35 +73,30 @@ export class RegistrationComponent implements OnInit {
     }
     if (this.selectedFiles?.length !== 0 && this.selectedFiles !== undefined) {
       // @ts-ignore
-      const y = this.userService.upload(this.selectedFiles, this.formFieldsDto.taskId);
-      y.subscribe(
+      this.userService.upload(this.selectedFiles, this.formFieldsDto.taskId).subscribe(
         res => {
-          alert('Your form is submitted succesfully!');
-          return;
+          alert('Files uploaded successfully!');
         },
         err => {
-          this.errorMessage = err.error;
-          console.log(err);
-          alert(this.errorMessage);
-          return;
+
+          alert('Files not uploaded successfully, try again!');
         }
       );
     }
     if (o.length !== 0) {
       // @ts-ignore
-      const x = this.userService.registerUser(o, this.formFieldsDto.taskId);
-
-      x.subscribe(
+      this.userService.registerUser(o, this.formFieldsDto.taskId).subscribe(
         res => {
-          alert('Your form is submitted succesfully!');
+          alert('Your form is submitted successfully!');
         },
         err => {
-          this.errorMessage = err.error;
+          this.errorMessage = err.error.message;
           console.log(err);
           alert(this.errorMessage);
         }
       );
     }
+
   }
 
   selectFiles(event: Event) {

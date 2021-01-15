@@ -14,7 +14,7 @@
       <input type="email" class="form-control col-lg-4 offset-lg-4" name={{field.id}} ngModel  *ngIf="field.type.name=='string' && field.id=='email'" >
       <input type="password" class="form-control col-lg-4 offset-lg-4" name={{field.id}} ngModel  *ngIf="field.type.name=='string' && field.id=='password'" >
 
-      <select name="field.id" *ngIf="field.type.name=='enum'">
+      <select class="form-control col-lg-4 offset-lg-4" name={{field.id}} *ngIf="field.type.name=='enum'"  ngModel>
         <option *ngFor="let val of enumValues" value={{val}}>
           {{field.type.values[val]}}
         </option>
