@@ -42,7 +42,6 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   exports: [
@@ -90,8 +89,11 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     OverlayModule,
     PortalModule,
     ScrollingModule,
-    BrowserAnimationsModule
   ]
 })
 export class DemoMaterialModule {}
 
+
+/**  Copyright 2020 Google LLC. All Rights Reserved.
+ Use of this source code is governed by an MIT-style license that
+ can be found in the LICENSE file at http://angular.io/license */

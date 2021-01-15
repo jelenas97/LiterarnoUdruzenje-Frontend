@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {RepositoryService} from '../services/repository/repository.service';
 import {UsersService} from '../services/users/users.service';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
+
+
+interface SelectElement {
+  value: string;
+  viewValue: string;
+}
 
 @Component({
   selector: 'app-registration',
@@ -15,13 +21,25 @@ export class RegistrationComponent implements OnInit {
   formFieldsDto = null;
   formFields: any;
   processInstance = '';
-  enumValues = [];
+  enumValues: any;
   tasks: any;
   errorMessage = '';
   fieldProperties = [];
   processId: any;
+  angForm: any;
+  private cc: any;
 
-  constructor(private userService: UsersService, private repositoryService: RepositoryService, private route: ActivatedRoute) {
+  selectElements: SelectElement[] = [];
+   toppingList: string[];
+   toppings: FormControl;
+
+  constructor(private userService: UsersService, private repositoryService: RepositoryService, private route: ActivatedRoute, private fb: FormBuilder) {
+
+    this.createForm();
+
+    this.toppings = new FormControl();
+
+    this.toppingList = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
 
     this.route.paramMap.subscribe(params => {
       this.processId = params.get('id');
@@ -34,13 +52,24 @@ export class RegistrationComponent implements OnInit {
           this.formFields = res.formFields;
           this.processInstance = res.processInstanceId;
 
-          console.log(this.formFields);
-
           this.formFields.forEach( (field) => {
 
+            if(field.properties.minlength !== undefined) {
+              console.log(field.properties.minlength);
+              this.angForm.addControl(field.id, new FormControl('',Validators.compose([Validators.required,Validators.minLength(field.properties.minlength)])));
+            }
+
+            if(field.properties.maxlength !== undefined) {
+              console.log(field.properties.maxlength);
+              this.angForm.addControl(field.id, new FormControl('',Validators.compose([Validators.required,Validators.maxLength(field.properties.maxlength)])));
+            }
+
+            this.angForm.addControl(field.id, new FormControl('',Validators.required));
+
             if (field.type.name === 'multiSelect') {
-              // @ts-ignore
-              this.enumValues = Object.keys(field.type.values);
+              Object.keys(field.type.values).forEach(value => {
+                this.selectElements.push({value: value, viewValue: field.type.values[value]});
+              })
             }
           });
         },
@@ -48,6 +77,13 @@ export class RegistrationComponent implements OnInit {
         }
       );
 
+    });
+  }
+
+  createForm() {
+    this.angForm = this.fb.group({
+      Username: [''],
+      Password: ['']
     });
   }
 
@@ -59,9 +95,6 @@ export class RegistrationComponent implements OnInit {
     const o = new Array();
 
     for (const property in value) {
-      console.log(property);
-      console.log(value[property]);
-
       if (value[property] instanceof Array) {
         o.push({fieldId: property, fieldValues: value[property]});
       } else {
