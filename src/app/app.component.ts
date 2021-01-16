@@ -24,4 +24,8 @@ export class AppComponent {
         this.router.navigate(['/registrate/' + this.processDto.processId]);
     });
   }
+
+  getRequests() {
+    this.router.navigate(['/requests']);
+  }
 }

@@ -12,18 +12,36 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {DemoMaterialModule} from '../material-module';
 import {MatInputModule} from '@angular/material/input';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from '@angular/material/form-field';
+import { WriterActivationComponent } from './writer-activation/writer-activation.component';
+import { RequestsListComponent } from './requests-list/requests-list.component';
+import { ReviewRequestComponent } from './review-request/review-request.component';
 
 const Routes = [
   {
     path: 'registrate/:id',
     component: RegistrationComponent,
+  },
+  {
+    path: 'reviewRequest/:id',
+    component: ReviewRequestComponent,
+  },
+  {
+    path: 'activatewriter/:id',
+    component: WriterActivationComponent,
+  },
+  {
+    path: 'requests',
+    component: RequestsListComponent,
   }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    WriterActivationComponent,
+    RequestsListComponent,
+    ReviewRequestComponent
   ],
     imports: [
         BrowserModule,

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {RepositoryService} from '../services/repository/repository.service';
 import {UsersService} from '../services/users/users.service';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
 
 
 interface SelectElement {
@@ -30,9 +30,10 @@ export class RegistrationComponent implements OnInit {
   private cc: any;
 
   selectElements: SelectElement[] = [];
+  selectedFiles: FileList | undefined;
 
-  constructor(private userService: UsersService, private repositoryService: RepositoryService, private route: ActivatedRoute, private fb: FormBuilder) {
-
+  constructor(private userService: UsersService, private repositoryService: RepositoryService,
+             private route: ActivatedRoute, private router: Router, private fb: FormBuilder) {
 
     this.createForm();
 
@@ -61,7 +62,7 @@ export class RegistrationComponent implements OnInit {
 
             this.angForm.addControl(field.id, new FormControl('',Validators.required));
 
-            if (field.type.name === 'multiSelect') {
+            if (field.type.name === 'multiSelect' || field.type.name == 'enum') {
               Object.keys(field.type.values).forEach(value => {
                 this.selectElements.push({value: value, viewValue: field.type.values[value]});
               })
@@ -86,9 +87,11 @@ export class RegistrationComponent implements OnInit {
 
   }
 
-  onSubmit(value, form){
+  onSubmit(value, form) {
     const o = new Array();
-
+    const p = new FormData();
+    console.log(value);
+    console.log(form);
     for (const property in value) {
       if (value[property] instanceof Array) {
         o.push({fieldId: property, fieldValues: value[property]});
@@ -96,16 +99,39 @@ export class RegistrationComponent implements OnInit {
         o.push({fieldId: property, fieldValue: value[property]});
       }
     }
-    // @ts-ignore
-    const x = this.userService.registerUser(o, this.formFieldsDto.taskId);
+    if (this.selectedFiles?.length !== 0 && this.selectedFiles !== undefined) {
+      // @ts-ignore
+      this.userService.upload(this.selectedFiles, this.formFieldsDto.taskId).subscribe(
+        res => {
+          alert('Files uploaded successfully!');
+          this.router.navigate(['/']);
+        },
+        err => {
 
-    x.subscribe(
-      res => {
-        alert('You registered successfully!');
-      },
-      err => {
-        this.errorMessage = err.error.message;
-      }
-    );
+          alert('Files not uploaded successfully, try again!');
+        }
+      );
+    }
+    if (o.length !== 0) {
+      // @ts-ignore
+      this.userService.registerUser(o, this.formFieldsDto.taskId).subscribe(
+        res => {
+          alert('Your form is submitted successfully!');
+          this.router.navigate(['/']);
+        },
+        err => {
+          this.errorMessage = err.error.message;
+          console.log(err);
+          alert(this.errorMessage);
+        }
+      );
+    }
+
+  }
+
+  selectFiles(event: Event) {
+   // @ts-ignore
+    this.selectedFiles = event.target.files;
+
   }
 }

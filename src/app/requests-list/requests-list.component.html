@@ -1,0 +1,4 @@
+<table>
+  <tr *ngFor="let task of tasks" > <td>{{task.name}} </td><td>{{task.assignee}} </td><td>{{task.dateTime}} </td><td><button (click)="review(task.taskId)">Review</button></td></tr>
+
+</table>

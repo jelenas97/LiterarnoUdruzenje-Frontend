@@ -1,12 +1,15 @@
 <form [formGroup]="angForm" #f="ngForm" (ngSubmit)="onSubmit(f.value, f)" class="col-lg-4 offset-lg-4">
   <div *ngFor="let field of formFields">
     <label class="mt-4">{{field.label}}</label>
-    <input type="text" class="form-control" formControlName={{field.id}} *ngIf="field.type.name=='string'">
+    <input type="text" class="form-control" formControlName={{field.id}} *ngIf="field.type.name=='string' && field.id!='email' && field.id!='password'">
 
     <input type="checkbox"class="mt-3 ml-3" name={{field.id}} formControlName={{field.id}}
            *ngIf="field.type.name=='boolean'">
     <input type="number" class="form-control" name={{field.id}} formControlName={{field.id}}
            *ngIf="field.type.name=='long'">
+
+    <input type="email" class="form-control col-lg-4 offset-lg-4" name={{field.id}} ngModel  *ngIf="field.type.name=='string' && field.id=='email'" >
+    <input type="password" class="form-control col-lg-4 offset-lg-4" name={{field.id}} ngModel  *ngIf="field.type.name=='string' && field.id=='password'" >
 
     <mat-form-field appearance="fill" *ngIf="field.type.name == 'multiSelect'">
       <mat-select multiple formControlName={{field.id}}>
@@ -21,6 +24,10 @@
         {{field.type.values[val]}}
       </option>
     </select>
+
+    <input type="file" name={{field.id}}  *ngIf="field.type.name=='file'"
+           multiple (change)="selectFiles($event)"/>
+
     <div class="pt-1" *ngIf="angForm.controls[field.id].invalid && (angForm.controls[field.id].dirty || angForm.controls[field.id].touched)">
       <p class="text-danger" *ngIf="angForm.controls[field.id].errors.required">{{field.label}} is required.</p>
       <p class="text-danger" *ngIf="angForm.controls[field.id].errors.minlength">
