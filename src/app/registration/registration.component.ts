@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {RepositoryService} from '../services/repository/repository.service';
 import {UsersService} from '../services/users/users.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -22,7 +22,8 @@ export class RegistrationComponent implements OnInit {
   processId: any;
   selectedFiles: FileList | undefined;
 
-  constructor(private userService: UsersService, private repositoryService: RepositoryService, private route: ActivatedRoute) {
+  constructor(private userService: UsersService, private repositoryService: RepositoryService,
+              private route: ActivatedRoute, private router: Router) {
 
     this.route.paramMap.subscribe(params => {
       this.processId = params.get('id');
@@ -76,6 +77,7 @@ export class RegistrationComponent implements OnInit {
       this.userService.upload(this.selectedFiles, this.formFieldsDto.taskId).subscribe(
         res => {
           alert('Files uploaded successfully!');
+          this.router.navigate(['/']);
         },
         err => {
 
@@ -88,6 +90,7 @@ export class RegistrationComponent implements OnInit {
       this.userService.registerUser(o, this.formFieldsDto.taskId).subscribe(
         res => {
           alert('Your form is submitted successfully!');
+          this.router.navigate(['/']);
         },
         err => {
           this.errorMessage = err.error.message;

@@ -20,11 +20,11 @@
         </option>
       </select>
 
-      <input type="file" name={{field.id}} *ngIf="field.type.name=='file'"
+      <input type="file" name={{field.id}}  *ngIf="field.type.name=='file'"
              multiple (change)="selectFiles($event)"/>
     </div>
 
 
-    <input type="submit" class="btn btn-primary">
+    <input type="submit" class="btn btn-primary form-control col-lg-4 offset-lg-4">
   </form>
 </div>

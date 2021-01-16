@@ -12,11 +12,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {DemoMaterialModule} from '../material-module';
 import { WriterActivationComponent } from './writer-activation/writer-activation.component';
 import { RequestsListComponent } from './requests-list/requests-list.component';
+import { ReviewRequestComponent } from './review-request/review-request.component';
 
 const Routes = [
   {
     path: 'registrate/:id',
     component: RegistrationComponent,
+  },
+  {
+    path: 'reviewRequest/:id',
+    component: ReviewRequestComponent,
   },
   {
     path: 'activatewriter/:id',
@@ -33,7 +38,8 @@ const Routes = [
     AppComponent,
     RegistrationComponent,
     WriterActivationComponent,
-    RequestsListComponent
+    RequestsListComponent,
+    ReviewRequestComponent
   ],
     imports: [
         BrowserModule,

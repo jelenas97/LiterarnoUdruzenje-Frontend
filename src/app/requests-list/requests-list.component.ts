@@ -13,7 +13,7 @@ export class RequestsListComponent implements OnInit {
   constructor(private camundaService: CamundaService, private router: Router) { }
 
   ngOnInit(): void {
-    const x = this.camundaService.getUserTasks("boardMember1");
+    const x = this.camundaService.getUserTasks("boardMember4");
 
     x.subscribe(
       res => {
@@ -27,7 +27,7 @@ export class RequestsListComponent implements OnInit {
   }
 
   review(taskId: any) {
-    this.router.navigate(['/registrate/' + taskId]);
+    this.router.navigate(['/reviewRequest/' + taskId]);
 
   }
 }
