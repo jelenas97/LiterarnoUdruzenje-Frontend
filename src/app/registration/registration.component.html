@@ -8,8 +8,8 @@
     <input type="number" class="form-control" name={{field.id}} formControlName={{field.id}}
            *ngIf="field.type.name=='long'">
 
-    <input type="email" class="form-control col-lg-4 offset-lg-4" name={{field.id}} ngModel  *ngIf="field.type.name=='string' && field.id=='email'" >
-    <input type="password" class="form-control col-lg-4 offset-lg-4" name={{field.id}} ngModel  *ngIf="field.type.name=='string' && field.id=='password'" >
+    <input type="email" class="form-control " name={{field.id}}  formControlName={{field.id}} *ngIf="field.type.name=='string' && field.id=='email'" >
+    <input type="password" class="form-control " name={{field.id}} formControlName={{field.id}} *ngIf="field.type.name=='string' && field.id=='password'" >
 
     <mat-form-field appearance="fill" *ngIf="field.type.name == 'multiSelect'">
       <mat-select multiple formControlName={{field.id}}>
