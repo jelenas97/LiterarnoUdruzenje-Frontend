@@ -55,7 +55,7 @@ export class AppComponent {
         this.router.navigate(['/registrate/' + this.processDto.processId]);
     });
   }
-
+  
   set(){
     if(this.currUser?.roles.includes("WRITER")){
       this.unauthorized=false;
@@ -85,7 +85,12 @@ export class AppComponent {
 
   }
 
-  logout(){
+  logout(){}
 
+  getRequests() {
+    this.router.navigate(['/requests']);
+  
   }
+    
 }
+

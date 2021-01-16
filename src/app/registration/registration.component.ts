@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {RepositoryService} from '../services/repository/repository.service';
 import {UsersService} from '../services/users/users.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -20,8 +20,10 @@ export class RegistrationComponent implements OnInit {
   errorMessage = '';
   fieldProperties = [];
   processId: any;
+  selectedFiles: FileList | undefined;
 
-  constructor(private userService: UsersService, private repositoryService: RepositoryService, private route: ActivatedRoute) {
+  constructor(private userService: UsersService, private repositoryService: RepositoryService,
+              private route: ActivatedRoute, private router: Router) {
 
     this.route.paramMap.subscribe(params => {
       this.processId = params.get('id');
@@ -38,7 +40,7 @@ export class RegistrationComponent implements OnInit {
 
           this.formFields.forEach( (field) => {
 
-            if (field.type.name === 'multiSelect') {
+            if (field.type.name === 'multiSelect' || field.type.name == 'enum') {
               // @ts-ignore
               this.enumValues = Object.keys(field.type.values);
             }
@@ -55,9 +57,11 @@ export class RegistrationComponent implements OnInit {
 
   }
 
-  onSubmit(value, form){
+  onSubmit(value, form) {
     const o = new Array();
-
+    const p = new FormData();
+    console.log(value);
+    console.log(form);
     for (const property in value) {
       console.log(property);
       console.log(value[property]);
@@ -68,16 +72,39 @@ export class RegistrationComponent implements OnInit {
         o.push({fieldId: property, fieldValue: value[property]});
       }
     }
-    // @ts-ignore
-    const x = this.userService.registerUser(o, this.formFieldsDto.taskId);
+    if (this.selectedFiles?.length !== 0 && this.selectedFiles !== undefined) {
+      // @ts-ignore
+      this.userService.upload(this.selectedFiles, this.formFieldsDto.taskId).subscribe(
+        res => {
+          alert('Files uploaded successfully!');
+          this.router.navigate(['/']);
+        },
+        err => {
 
-    x.subscribe(
-      res => {
-        alert('You registered successfully!');
-      },
-      err => {
-        this.errorMessage = err.error.message;
-      }
-    );
+          alert('Files not uploaded successfully, try again!');
+        }
+      );
+    }
+    if (o.length !== 0) {
+      // @ts-ignore
+      this.userService.registerUser(o, this.formFieldsDto.taskId).subscribe(
+        res => {
+          alert('Your form is submitted successfully!');
+          this.router.navigate(['/']);
+        },
+        err => {
+          this.errorMessage = err.error.message;
+          console.log(err);
+          alert(this.errorMessage);
+        }
+      );
+    }
+
+  }
+
+  selectFiles(event: Event) {
+   // @ts-ignore
+    this.selectedFiles = event.target.files;
+
   }
 }

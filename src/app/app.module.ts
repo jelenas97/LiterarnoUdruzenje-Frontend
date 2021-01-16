@@ -13,11 +13,27 @@ import {DemoMaterialModule} from '../material-module';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './services/auth.service';
 import { HomepageComponent } from './homepage/homepage.component';
+import { WriterActivationComponent } from './writer-activation/writer-activation.component';
+import { RequestsListComponent } from './requests-list/requests-list.component';
+import { ReviewRequestComponent } from './review-request/review-request.component';
+
 
 const Routes = [
   {
     path: 'registrate/:id',
     component: RegistrationComponent,
+  },
+  {
+    path: 'reviewRequest/:id',
+    component: ReviewRequestComponent,
+  },
+  {
+    path: 'activatewriter/:id',
+    component: WriterActivationComponent,
+  },
+  {
+    path: 'requests',
+    component: RequestsListComponent,
   }
 ];
 
@@ -26,7 +42,11 @@ const Routes = [
     AppComponent,
     RegistrationComponent,
     LoginComponent,
-    HomepageComponent
+    HomepageComponent,
+    WriterActivationComponent,
+    RequestsListComponent,
+    ReviewRequestComponent
+
   ],
     imports: [
         BrowserModule,
