@@ -9,11 +9,11 @@
            *ngIf="field.type.name=='long'">
 
     <mat-form-field appearance="fill" *ngIf="field.type.name == 'multiSelect'">
-    <mat-select multiple class="form-control" formControlName={{field.id}}>
-      <mat-option matinput="" class="col-lg-2 offset-lg-4 mt-0 pt-0" *ngFor="let element of selectElements" value={{element.value}}>
-        {{element.viewValue}}
-      </mat-option>
-    </mat-select>
+      <mat-select multiple formControlName={{field.id}}>
+        <mat-option class="mt-0 pt-0" *ngFor="let element of selectElements" value={{element.value}}>
+          {{element.viewValue}}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
 
     <select name={{field.id}} *ngIf="field.type.name=='enum'" formControlName={{field.id}}>
@@ -32,4 +32,5 @@
   <div class="">
     <input type="submit" class="col-lg-2 offset-lg-10 btn btn-primary" value="Save">
   </div>
+
 </form>

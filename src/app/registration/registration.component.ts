@@ -30,16 +30,11 @@ export class RegistrationComponent implements OnInit {
   private cc: any;
 
   selectElements: SelectElement[] = [];
-   toppingList: string[];
-   toppings: FormControl;
 
   constructor(private userService: UsersService, private repositoryService: RepositoryService, private route: ActivatedRoute, private fb: FormBuilder) {
 
+
     this.createForm();
-
-    this.toppings = new FormControl();
-
-    this.toppingList = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
 
     this.route.paramMap.subscribe(params => {
       this.processId = params.get('id');
