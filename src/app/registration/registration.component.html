@@ -3,7 +3,7 @@
 
     <div *ngFor="let field of formFields">
       <label class="mt-4 col-lg-4 offset-lg-4 p-0 ">{{field.label}}</label>
-      <input type="text" class="form-control col-lg-4 offset-lg-4" name={{field.id}} ngModel  *ngIf="field.type.name=='string'" >
+      <input type="text" class="form-control col-lg-4 offset-lg-4" name={{field.id}} ngModel  *ngIf="field.type.name=='string' && field.id!='email' && field.id!='password'" >
       <input type="checkbox" class="col-lg-4 offset-lg-4" name={{field.id}} ngModel  *ngIf="field.type.name=='boolean'">
       <input type="number" class="col-lg-4 offset-lg-4" name={{field.id}} ngModel  *ngIf="field.type.name=='long'">
       <mat-select multiple class="form-control col-lg-4 offset-lg-4" name={{field.id}} ngModel *ngIf="field.type.name=='multiSelect'">
@@ -11,15 +11,20 @@
           {{field.type.values[val]}}
         </mat-option>
       </mat-select>
+      <input type="email" class="form-control col-lg-4 offset-lg-4" name={{field.id}} ngModel  *ngIf="field.type.name=='string' && field.id=='email'" >
+      <input type="password" class="form-control col-lg-4 offset-lg-4" name={{field.id}} ngModel  *ngIf="field.type.name=='string' && field.id=='password'" >
 
-      <select name="field.id" *ngIf="field.type.name=='enum'">
+      <select class="form-control col-lg-4 offset-lg-4" name={{field.id}} *ngIf="field.type.name=='enum'"  ngModel>
         <option *ngFor="let val of enumValues" value={{val}}>
           {{field.type.values[val]}}
         </option>
       </select>
+
+      <input type="file" name={{field.id}}  *ngIf="field.type.name=='file'"
+             multiple (change)="selectFiles($event)"/>
     </div>
 
 
-    <input type="submit" class="btn btn-primary">
+    <input type="submit" class="btn btn-primary form-control col-lg-4 offset-lg-4">
   </form>
 </div>

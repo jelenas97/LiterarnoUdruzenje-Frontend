@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpEvent, HttpRequest} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -15,5 +15,22 @@ export class UsersService {
 
   registerUser(user: any, taskId: any) {
     return this.httpClient.post('http://localhost:8080/registration/post/'.concat(taskId), user) as Observable<any>;
+  }
+
+  activateUser(processId: any) {
+    return this.httpClient.get('http://localhost:8080/registration/activate/'.concat(processId)) as Observable<any>;
+  }
+
+  download() {
+    return this.httpClient
+      .get('http://localhost:8080/registration/download/123?taskId=a8bbf359-512d-11eb-a991-b010410e0ab5') as Observable<any>;
+  }
+
+  upload(files: FileList, processId: any) {
+    const formData: FormData = new FormData();
+    for (var i = 0; i < files.length; i++) {
+      formData.append('files', files[i]);
+    }
+    return this.httpClient.post('http://localhost:8080/registration/uploadFile/'.concat(processId), formData) as Observable<any>;
   }
 }
