@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RegistrationComponent } from './registration/registration.component';
+import { FormComponent } from './form/form.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
@@ -13,6 +13,8 @@ import {DemoMaterialModule} from '../material-module';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './services/auth.service';
 import { HomepageComponent } from './homepage/homepage.component';
+import {MatInputModule} from '@angular/material/input';
+import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from '@angular/material/form-field';
 import { WriterActivationComponent } from './writer-activation/writer-activation.component';
 import { RequestsListComponent } from './requests-list/requests-list.component';
 import { ReviewRequestComponent } from './review-request/review-request.component';
@@ -22,7 +24,7 @@ import { ReaderActivationComponent } from './reader-activation/reader-activation
 const Routes = [
   {
     path: 'registrate/:id',
-    component: RegistrationComponent,
+    component: FormComponent,
   },
   {
     path: 'reviewRequest/:id',
@@ -45,7 +47,7 @@ const Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    RegistrationComponent,
+    FormComponent,
     LoginComponent,
     HomepageComponent,
     WriterActivationComponent,
@@ -65,11 +67,10 @@ const Routes = [
         BrowserAnimationsModule,
         HttpClientModule,
         DemoMaterialModule,
-        ReactiveFormsModule
+        MatInputModule
     ],
-  providers: [
-    AuthService
-  ],
+  providers: [ { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }, AuthService],
+  entryComponents: [FormComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
