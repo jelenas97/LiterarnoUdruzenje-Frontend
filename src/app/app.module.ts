@@ -16,6 +16,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { WriterActivationComponent } from './writer-activation/writer-activation.component';
 import { RequestsListComponent } from './requests-list/requests-list.component';
 import { ReviewRequestComponent } from './review-request/review-request.component';
+import { ReaderActivationComponent } from './reader-activation/reader-activation.component';
 
 
 const Routes = [
@@ -34,6 +35,10 @@ const Routes = [
   {
     path: 'requests',
     component: RequestsListComponent,
+  },
+  {
+    path: 'activatereader/:id',
+    component: ReaderActivationComponent,
   }
 ];
 
@@ -45,7 +50,8 @@ const Routes = [
     HomepageComponent,
     WriterActivationComponent,
     RequestsListComponent,
-    ReviewRequestComponent
+    ReviewRequestComponent,
+    ReaderActivationComponent
 
   ],
     imports: [
