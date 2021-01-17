@@ -21,7 +21,7 @@ export class AppComponent {
   boardMember: boolean | undefined;
   writer: boolean | undefined;
   // itd
-  
+
 
 
   constructor(private camundaService: CamundaService, private router: Router,
@@ -55,7 +55,15 @@ export class AppComponent {
         this.router.navigate(['/registrate/' + this.processDto.processId]);
     });
   }
-  
+
+  startWriterRegistrationProcess() {
+    this.camundaService.startWriterRegistrationProcess().subscribe( data => {
+      this.processDto = data;
+      console.log(this.processDto);
+      this.router.navigate(['/registrate/' + this.processDto.processId]);
+    });
+  }
+
   set(){
     if(this.currUser?.roles.includes("WRITER")){
       this.unauthorized=false;
@@ -81,23 +89,18 @@ export class AppComponent {
       this.betaReader=false;
       this.boardMember=true;
       this.writer=false;
-    } 
+    }
 
   }
 
   logout(){}
 
-  startWriterRegistrationProcess() {
-    this.camundaService.startWriterRegistrationProcess().subscribe( data => {
-      this.processDto = data;
-      console.log(this.processDto);
-    });
-  }
+
 
   getRequests() {
     this.router.navigate(['/requests']);
-  
+
   }
-    
+
 }
 

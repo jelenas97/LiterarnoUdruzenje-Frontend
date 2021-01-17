@@ -11,7 +11,7 @@
     <input type="email" class="form-control " name={{field.id}}  formControlName={{field.id}} *ngIf="field.type.name=='string' && field.id=='email'" >
     <input type="password" class="form-control " name={{field.id}} formControlName={{field.id}} *ngIf="field.type.name=='string' && field.id=='password'" >
 
-    <mat-form-field appearance="fill" *ngIf="field.type.name == 'multiSelect'">
+    <mat-form-field appearance="fill" class="pt-4 pl-3" *ngIf="field.type.name == 'multiSelect'">
       <mat-select multiple formControlName={{field.id}}>
         <mat-option class="mt-0 pt-0" *ngFor="let element of selectElements" value={{element.value}}>
           {{element.viewValue}}
@@ -32,6 +32,9 @@
       <p class="text-danger" *ngIf="angForm.controls[field.id].errors.required">{{field.label}} is required.</p>
       <p class="text-danger" *ngIf="angForm.controls[field.id].errors.minlength">
         {{field.label}} field required minimum {{field.properties.minlength}} characters.
+      </p>
+      <p class="text-danger" *ngIf="angForm.controls[field.id].errors.maxlength">
+        {{field.label}} field can not have more than {{field.properties.maxlength}} characters.
       </p>
     </div>
   </div>

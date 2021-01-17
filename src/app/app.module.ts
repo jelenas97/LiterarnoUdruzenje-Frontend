@@ -48,7 +48,6 @@ const Routes = [
   declarations: [
     AppComponent,
     FormComponent,
-    RegistrationComponent,
     LoginComponent,
     HomepageComponent,
     WriterActivationComponent,

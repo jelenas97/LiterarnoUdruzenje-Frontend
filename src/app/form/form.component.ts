@@ -48,7 +48,14 @@ export class FormComponent implements OnInit {
           this.formFields = res.formFields;
           this.processInstance = res.processInstanceId;
 
+          console.log(this.formFields);
+
           this.formFields.forEach( (field) => {
+
+
+            if(field.properties.minlength !== undefined && field.properties.maxlength !== undefined) {
+              this.angForm.addControl(field.id, new FormControl('',Validators.compose([Validators.required,Validators.minLength(field.properties.minlength), Validators.maxLength(field.properties.maxlength)])));
+            }
 
             if(field.properties.minlength !== undefined) {
               this.angForm.addControl(field.id, new FormControl('',Validators.compose([Validators.required,Validators.minLength(field.properties.minlength)])));
