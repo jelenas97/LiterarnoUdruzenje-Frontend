@@ -10,11 +10,16 @@ import {HttpClientModule} from '@angular/common/http';
 import {MatSelectModule} from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {DemoMaterialModule} from '../material-module';
+import { LoginComponent } from './login/login.component';
+import { AuthService } from './services/auth.service';
+import { HomepageComponent } from './homepage/homepage.component';
 import {MatInputModule} from '@angular/material/input';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from '@angular/material/form-field';
 import { WriterActivationComponent } from './writer-activation/writer-activation.component';
 import { RequestsListComponent } from './requests-list/requests-list.component';
 import { ReviewRequestComponent } from './review-request/review-request.component';
+import { ReaderActivationComponent } from './reader-activation/reader-activation.component';
+
 
 const Routes = [
   {
@@ -32,6 +37,10 @@ const Routes = [
   {
     path: 'requests',
     component: RequestsListComponent,
+  },
+  {
+    path: 'activatereader/:id',
+    component: ReaderActivationComponent,
   }
 ];
 
@@ -39,9 +48,14 @@ const Routes = [
   declarations: [
     AppComponent,
     FormComponent,
+    RegistrationComponent,
+    LoginComponent,
+    HomepageComponent,
     WriterActivationComponent,
     RequestsListComponent,
-    ReviewRequestComponent
+    ReviewRequestComponent,
+    ReaderActivationComponent
+
   ],
     imports: [
         BrowserModule,
@@ -56,7 +70,7 @@ const Routes = [
         DemoMaterialModule,
         MatInputModule
     ],
-  providers: [ { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },],
+  providers: [ { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }, AuthService],
   entryComponents: [FormComponent],
   bootstrap: [AppComponent]
 })

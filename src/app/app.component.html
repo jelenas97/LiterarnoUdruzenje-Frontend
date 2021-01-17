@@ -1,8 +1,9 @@
-<nav class="navbar navbar-light bg-light">
-
-  <button class="navbar-brand"  (click)="startWriterRegistrationProcess()">Register as Writer</button>
-  <button class="navbar-brand"  (click)="startReaderRegistrationProcess()">Register as Reader</button>
-  <button class="navbar-brand"  (click)="getRequests()">Show requests</button>
-
-</nav>
+<div class="navbar navbar-light bg-dark">
+  <div class="navbar-buttons">
+    <button class="navbar-brand"  (click)="startWriterRegistrationProcess()">Register as Writer</button>
+    <button class="navbar-brand"  (click)="startReaderRegistrationProcess()">Register as Reader</button>
+    <button class="navbar-brand" routerLink="/login" =>Login</button>
+    <button class="navbar-brand"  (click)="getRequests()">Show requests</button>
+  </div>
+</div>
 <router-outlet></router-outlet>
