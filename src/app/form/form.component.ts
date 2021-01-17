@@ -11,11 +11,11 @@ interface SelectElement {
 }
 
 @Component({
-  selector: 'app-registration',
-  templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.css']
+  selector: 'app-form',
+  templateUrl: './form.component.html',
+  styleUrls: ['./form.component.css']
 })
-export class RegistrationComponent implements OnInit {
+export class FormComponent implements OnInit {
 
   categories = [];
   formFieldsDto = null;
@@ -51,12 +51,10 @@ export class RegistrationComponent implements OnInit {
           this.formFields.forEach( (field) => {
 
             if(field.properties.minlength !== undefined) {
-              console.log(field.properties.minlength);
               this.angForm.addControl(field.id, new FormControl('',Validators.compose([Validators.required,Validators.minLength(field.properties.minlength)])));
             }
 
             if(field.properties.maxlength !== undefined) {
-              console.log(field.properties.maxlength);
               this.angForm.addControl(field.id, new FormControl('',Validators.compose([Validators.required,Validators.maxLength(field.properties.maxlength)])));
             }
 

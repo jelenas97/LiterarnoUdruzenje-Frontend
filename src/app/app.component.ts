@@ -17,11 +17,18 @@ export class AppComponent {
       this.processDto = new ProcessDto();
   }
 
-  startRegistrationProcess() {
+  startReaderRegistrationProcess() {
     this.camundaService.startReaderRegistrationProcess().subscribe( data => {
         this.processDto = data;
         console.log(this.processDto);
         this.router.navigate(['/registrate/' + this.processDto.processId]);
+    });
+  }
+
+  startWriterRegistrationProcess() {
+    this.camundaService.startWriterRegistrationProcess().subscribe( data => {
+      this.processDto = data;
+      console.log(this.processDto);
     });
   }
 

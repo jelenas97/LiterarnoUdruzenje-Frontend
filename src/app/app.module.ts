@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RegistrationComponent } from './registration/registration.component';
+import { FormComponent } from './form/form.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
@@ -19,7 +19,7 @@ import { ReviewRequestComponent } from './review-request/review-request.componen
 const Routes = [
   {
     path: 'registrate/:id',
-    component: RegistrationComponent,
+    component: FormComponent,
   },
   {
     path: 'reviewRequest/:id',
@@ -38,7 +38,7 @@ const Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    RegistrationComponent,
+    FormComponent,
     WriterActivationComponent,
     RequestsListComponent,
     ReviewRequestComponent
@@ -57,7 +57,7 @@ const Routes = [
         MatInputModule
     ],
   providers: [ { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },],
-  entryComponents: [RegistrationComponent],
+  entryComponents: [FormComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
