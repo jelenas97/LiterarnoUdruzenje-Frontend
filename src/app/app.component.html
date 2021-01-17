@@ -1,7 +1,9 @@
-<nav class="navbar navbar-light bg-light">
+<div class="navbar navbar-light bg-dark"> 
+  <div class="navbar-buttons">
+    <button class="navbar-brand"  (click)="startRegistrationProcess()">Registrate</button>
+    <button class="navbar-brand" routerLink="/login" >Login</button>
+    <button class="navbar-brand"  (click)="getRequests()">Show requests</button>
+  </div> 
+</div>
 
-  <button class="navbar-brand"  (click)="startRegistrationProcess()">Registrate</button>
-  <button class="navbar-brand"  (click)="getRequests()">Show requests</button>
-
-</nav>
 <router-outlet></router-outlet>

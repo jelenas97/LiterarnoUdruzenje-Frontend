@@ -1,0 +1,13 @@
+.navbar button {
+    padding: 7px;
+    font-size: 17px;
+    border-radius: 12px;
+  }
+
+.navbar-buttons{
+ width: 100%;
+}
+  
+.navbar-brand{
+    float: right;
+}

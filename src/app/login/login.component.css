@@ -1,0 +1,50 @@
+.card-panel {
+    box-shadow: rgba(0, 0, 0, 0.1) 0 5px 40px, rgba(0, 0, 0, 0.1) 0 5px 10px;
+    border-bottom: 10px solid transparent;
+    transition: box-shadow 0.25s;
+    border-radius: 2px;
+    background-color: #fff;
+    opacity: 0.80;
+  }
+  
+  .form-group a fa-icon {
+    margin: 0 auto;
+    font-size: 5rem;
+    font-style: normal;
+  }
+  
+  .min-container .card-panel form .fa {
+    top: 9px;
+    left: 1rem;
+  }
+  
+  .bg {
+    background-image: url("../images/bg.jpg");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.75;
+  
+  }
+  
+  .form-control:focus {
+    box-shadow: none;
+  }
+  
+  .form-control {
+    outline: 0;
+    border-width: 0 0 2px;
+    border-bottom-color: gray;
+  }
+  
+  @media (min-width: 768px) {
+    .min-container {
+      max-width: 550px;
+    }
+  }
+  
+  .min-container {
+    padding-top: 9rem;
+  }
+  

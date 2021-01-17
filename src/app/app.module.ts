@@ -10,9 +10,14 @@ import {HttpClientModule} from '@angular/common/http';
 import {MatSelectModule} from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {DemoMaterialModule} from '../material-module';
+import { LoginComponent } from './login/login.component';
+import { AuthService } from './services/auth.service';
+import { HomepageComponent } from './homepage/homepage.component';
 import { WriterActivationComponent } from './writer-activation/writer-activation.component';
 import { RequestsListComponent } from './requests-list/requests-list.component';
 import { ReviewRequestComponent } from './review-request/review-request.component';
+import { ReaderActivationComponent } from './reader-activation/reader-activation.component';
+
 
 const Routes = [
   {
@@ -30,6 +35,10 @@ const Routes = [
   {
     path: 'requests',
     component: RequestsListComponent,
+  },
+  {
+    path: 'activatereader/:id',
+    component: ReaderActivationComponent,
   }
 ];
 
@@ -37,9 +46,13 @@ const Routes = [
   declarations: [
     AppComponent,
     RegistrationComponent,
+    LoginComponent,
+    HomepageComponent,
     WriterActivationComponent,
     RequestsListComponent,
-    ReviewRequestComponent
+    ReviewRequestComponent,
+    ReaderActivationComponent
+
   ],
     imports: [
         BrowserModule,
@@ -54,7 +67,9 @@ const Routes = [
         DemoMaterialModule,
         ReactiveFormsModule
     ],
-  providers: [],
+  providers: [
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

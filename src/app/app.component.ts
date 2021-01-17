@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {CamundaService} from './services/camunda/camunda.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ProcessDto} from './dto/processDto';
+import { User } from './shared/model/user';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -11,10 +13,39 @@ import {ProcessDto} from './dto/processDto';
 export class AppComponent {
   title = 'literarnoudruzenjefrontend';
   processDto: ProcessDto;
+  currUser: User | undefined;
+  roles: string[] | undefined;
+  unauthorized: boolean;
+  reader: boolean | undefined;
+  betaReader: boolean | undefined;
+  boardMember: boolean | undefined;
+  writer: boolean | undefined;
+  // itd
+  
 
 
-  constructor(private camundaService: CamundaService, private router: Router) {
+  constructor(private camundaService: CamundaService, private router: Router,
+    private authService: AuthService) {
       this.processDto = new ProcessDto();
+      this.unauthorized=true;
+  }
+
+  ngOnInit(): void {
+    this.currUser= this.authService.getCurrUser();
+    console.log(this.currUser.roles);
+    if(this.currUser.roles === undefined){
+      this.unauthorized=true;
+      this.reader= false;
+      this.betaReader= false;
+      this.boardMember= false;
+      this.writer= false;
+      //
+    }else{
+      if(this.currUser.roles!= null){
+        this.set();
+      }
+    }
+    //this.router.navigate(['login']);
   }
 
   startRegistrationProcess() {
@@ -24,8 +55,42 @@ export class AppComponent {
         this.router.navigate(['/registrate/' + this.processDto.processId]);
     });
   }
+  
+  set(){
+    if(this.currUser?.roles.includes("WRITER")){
+      this.unauthorized=false;
+      this.reader=false;
+      this.betaReader=false;
+      this.boardMember=false;
+      this.writer=true;
+    } else if (this.currUser?.roles.includes("READER")){
+      this.unauthorized=false;
+      this.reader=true;
+      this.betaReader=false;
+      this.boardMember=false;
+      this.writer=false;
+    } else if (this.currUser?.roles.includes("BETAREADER")){
+      this.unauthorized=false;
+      this.reader=false;
+      this.betaReader=true;
+      this.boardMember=false;
+      this.writer=false;
+    } else if (this.currUser?.roles.includes("BOARDMEMBER")){
+      this.unauthorized=false;
+      this.reader=false;
+      this.betaReader=false;
+      this.boardMember=true;
+      this.writer=false;
+    } 
+
+  }
+
+  logout(){}
 
   getRequests() {
     this.router.navigate(['/requests']);
+  
   }
+    
 }
+
