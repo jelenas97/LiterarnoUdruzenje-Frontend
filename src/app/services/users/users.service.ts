@@ -21,9 +21,9 @@ export class UsersService {
     return this.httpClient.get('http://localhost:8080/registration/activate/'.concat(processId)) as Observable<any>;
   }
 
-  download() {
+  download(name: any, processId: string): Observable<any>{
     return this.httpClient
-      .get('http://localhost:8080/registration/download/123?taskId=a8bbf359-512d-11eb-a991-b010410e0ab5') as Observable<any>;
+      .get('http://localhost:8080/registration/download/'.concat(name).concat('?taskId=').concat(processId), { responseType: 'blob' });
   }
 
   upload(files: FileList, processId: any) {
