@@ -34,4 +34,8 @@ export class RepositoryService {
     return this.httpClient.post('http://localhost:8080/registration/tasks/complete/'.concat(taskId), null) as Observable<any>;
   }
 
+  getFileNames(processId: string) {
+    return this.httpClient.get('http://localhost:8080/registration/files/'.concat(processId)) as Observable<any>;
+
+  }
 }
