@@ -1,4 +1,18 @@
+<div class="">
+  <h1>Book requests</h1>
 <table>
-  <tr *ngFor="let task of tasks" > <td>{{task.name}} </td><td>{{task.assignee}} </td><td>{{task.dateTime}} </td><td><button (click)="review(task.taskId)">Review</button></td></tr>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr *ngFor="let task of tasks"> 
+      <td>{{task.name}} </td>
+      <td>{{task.assignee}} </td>
+      <td>{{task.dateTime}} </td>
+      <td><button (click)="review(task.taskId)">Review</button></td>
+  </tr>
 
 </table>
+</div>
