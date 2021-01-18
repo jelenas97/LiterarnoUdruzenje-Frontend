@@ -1,4 +1,7 @@
-<form [formGroup]="angForm" #f="ngForm" (ngSubmit)="onSubmit(f.value, f)" class="col-lg-4 offset-lg-4">
+<div class="bg">
+  <br><br>
+<form [formGroup]="angForm" #f="ngForm" (ngSubmit)="onSubmit(f.value, f)" class="white col-lg-4 offset-lg-4">
+  <br>
   <div *ngFor="let field of formFields">
     <label class="mt-4">{{field.label}}</label>
     <input type="text" class="form-control" formControlName={{field.id}} *ngIf="field.type.name=='string' && field.id!='email' && field.id!='password'">
@@ -39,8 +42,10 @@
     </div>
   </div>
 
-  <div class="">
-    <input type="submit" class="col-lg-2 offset-lg-10 btn btn-primary" value="Save">
+  <div class="submit">
+    <input type="submit" class="col-lg-2 offset-lg-10 btn btn-primary" value="Submit">
   </div>
-
+  <br>
 </form>
+<br><br><br>
+</div>
