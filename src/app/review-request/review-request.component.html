@@ -1,7 +1,18 @@
-<!--<div>
-  <tr *ngFor="let file of files" >
-    <td>{{file.name}} </td>
-    <td><button (click)="download(file.name)">Review</button></td>
-  </tr>
-</div>-->
-<app-form></app-form>
+  <div style="width: 50%">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">File name</th>
+        <th scope="col"></th>
+
+      </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let filename of files" >
+          <td>{{filename}} </td>
+          <td><button class="btn btn-success" (click)="download(filename)">Download and view</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <app-form></app-form>
