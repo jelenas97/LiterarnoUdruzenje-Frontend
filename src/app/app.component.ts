@@ -32,8 +32,7 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.currUser= this.authService.getCurrUser();
-    console.log(this.currUser.roles);
-    if(this.currUser.roles === undefined){
+    if(this.currUser === null){
       this.unauthorized=true;
       this.reader= false;
       this.betaReader= false;
@@ -93,7 +92,10 @@ export class AppComponent {
 
   }
 
-  logout(){}
+  logout(){
+    this.authService.logout();
+    this.ngOnInit();
+  }
 
 
 
