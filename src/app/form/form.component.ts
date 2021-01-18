@@ -31,6 +31,7 @@ export class FormComponent implements OnInit {
 
   selectElements: SelectElement[] = [];
   selectedFiles: FileList | undefined;
+  private redirect = false;
 
   constructor(private userService: UsersService, private repositoryService: RepositoryService,
              private route: ActivatedRoute, private router: Router, private fb: FormBuilder) {
@@ -83,8 +84,6 @@ export class FormComponent implements OnInit {
 
   createForm() {
     this.angForm = this.fb.group({
-      Username: [''],
-      Password: ['']
     });
   }
 
@@ -98,9 +97,14 @@ export class FormComponent implements OnInit {
     console.log(value);
     console.log(form);
     for (const property in value) {
+      if (property === 'betaReader'){
+        if (value[property] === true) {
+          this.redirect = true;
+        }
+      }
       if (value[property] instanceof Array) {
         o.push({fieldId: property, fieldValues: value[property]});
-      } else {
+      } else if (property !== 'files') {
         o.push({fieldId: property, fieldValue: value[property]});
       }
     }
@@ -122,7 +126,11 @@ export class FormComponent implements OnInit {
       this.userService.registerUser(o, this.formFieldsDto.taskId).subscribe(
         res => {
           alert('Your form is submitted successfully!');
-          this.router.navigate(['/']);
+          if (this.redirect) {
+            this.redirectTo('/registrate/' + this.processId);
+          } else {
+            this.router.navigate(['/']);
+          }
         },
         err => {
           this.errorMessage = err.error.message;
@@ -138,5 +146,10 @@ export class FormComponent implements OnInit {
    // @ts-ignore
     this.selectedFiles = event.target.files;
 
+  }
+
+  redirectTo(uri: string){
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+      this.router.navigate([uri]));
   }
 }
