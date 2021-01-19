@@ -1,3 +1,4 @@
+import { BookService } from './../services/bookService';
 import { Component, OnInit } from '@angular/core';
 import {RepositoryService} from '../services/repository/repository.service';
 import {UsersService} from '../services/users/users.service';
@@ -28,13 +29,16 @@ export class FormComponent implements OnInit {
   processId: any;
   angForm: any;
   private cc: any;
+  bookForm = false;
+  synopsisReview=false;
 
   selectElements: SelectElement[] = [];
   selectedFiles: FileList | undefined;
   private redirect = false;
 
   constructor(private userService: UsersService, private repositoryService: RepositoryService,
-             private route: ActivatedRoute, private router: Router, private fb: FormBuilder) {
+             private route: ActivatedRoute, private router: Router, private fb: FormBuilder,
+             private bookService: BookService) {
 
     this.createForm();
 
@@ -97,6 +101,10 @@ export class FormComponent implements OnInit {
     console.log(value);
     console.log(form);
     for (const property in value) {
+      console.log(property);
+      if(property==='decision'){
+        this.synopsisReview=true;
+      }
       if (property === 'betaReader'){
         if (value[property] === true) {
           this.redirect = true;
@@ -121,7 +129,31 @@ export class FormComponent implements OnInit {
         }
       );
     }
-    if (o.length !== 0) {
+    for (const property in value) {
+      if(property==='title'){
+        this.bookForm=true;
+        this.bookService.saveBook(o, this.formFieldsDto.taskId).subscribe(
+          res=>{
+            alert('Your form is submitted successfully!');
+            this.redirectTo('/homepage');
+          }
+        )
+        break;
+      }
+    }
+    for (const property in value) {
+      if(property==='decision'){
+        this.synopsisReview=true;
+        this.bookService.decideOnSynopsis(o, this.formFieldsDto.taskId).subscribe(
+          res=>{
+            alert('Your form is submitted successfully!');
+            this.redirectTo('/homepage');
+          }
+        )
+        break;
+      }
+    }
+    if (o.length !== 0 &&  !this.bookForm && !this.synopsisReview) {
       // @ts-ignore
       this.userService.registerUser(o, this.formFieldsDto.taskId).subscribe(
         res => {
@@ -138,6 +170,7 @@ export class FormComponent implements OnInit {
           alert(this.errorMessage);
         }
       );
+      
     }
 
   }

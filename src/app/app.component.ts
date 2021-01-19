@@ -20,6 +20,7 @@ export class AppComponent {
   betaReader: boolean | undefined;
   boardMember: boolean | undefined;
   writer: boolean | undefined;
+  editor: boolean | undefined;
   // itd
 
 
@@ -38,6 +39,7 @@ export class AppComponent {
       this.betaReader= false;
       this.boardMember= false;
       this.writer= false;
+      this.editor=false;
       //
     }else{
       if(this.currUser.roles!= null){
@@ -63,6 +65,14 @@ export class AppComponent {
     });
   }
 
+  startBookPublishingProcess(){
+    this.camundaService.startBookPublishingProcess().subscribe( data => {
+      this.processDto = data;
+      console.log(this.processDto);
+      this.router.navigate(['/bookPublishing/' + this.processDto.processId]);
+    });
+  }
+
   set(){
     if(this.currUser?.roles.includes("WRITER")){
       this.unauthorized=false;
@@ -70,34 +80,47 @@ export class AppComponent {
       this.betaReader=false;
       this.boardMember=false;
       this.writer=true;
+      this.editor=false;
     } else if (this.currUser?.roles.includes("READER")){
       this.unauthorized=false;
       this.reader=true;
       this.betaReader=false;
       this.boardMember=false;
       this.writer=false;
+      this.editor=false;
     } else if (this.currUser?.roles.includes("BETAREADER")){
       this.unauthorized=false;
       this.reader=false;
       this.betaReader=true;
       this.boardMember=false;
       this.writer=false;
+      this.editor=false;
     } else if (this.currUser?.roles.includes("BOARDMEMBER")){
       this.unauthorized=false;
       this.reader=false;
       this.betaReader=false;
       this.boardMember=true;
       this.writer=false;
+      this.editor=false;
+    } else if (this.currUser?.roles.includes("EDITOR")){
+      this.unauthorized=false;
+      this.reader=false;
+      this.betaReader=false;
+      this.boardMember=false;
+      this.writer=false;
+      this.editor=true;
     }
 
+  }
+
+  getSubmitedSynopses(){
+    this.router.navigate(['/synopses']);
   }
 
   logout(){
     this.authService.logout();
     this.ngOnInit();
   }
-
-
 
   getRequests() {
     this.router.navigate(['/requests']);
