@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +19,8 @@ import { WriterActivationComponent } from './writer-activation/writer-activation
 import { RequestsListComponent } from './requests-list/requests-list.component';
 import { ReviewRequestComponent } from './review-request/review-request.component';
 import { ReaderActivationComponent } from './reader-activation/reader-activation.component';
+import { SynopsesComponent } from './synopses/synopses.component';
+import { SynopsisReviewComponent } from './synopsis-review/synopsis-review.component';
 
 
 const Routes = [
@@ -41,6 +43,18 @@ const Routes = [
   {
     path: 'activatereader/:id',
     component: ReaderActivationComponent,
+  },
+  {
+    path: 'bookPublishing/:id',
+    component: FormComponent,
+  },
+  {
+    path: 'synopses',
+    component: SynopsesComponent,
+  },
+  {
+    path:'synopsisReview/:id',
+    component: SynopsisReviewComponent, 
   }
 ];
 
@@ -53,7 +67,9 @@ const Routes = [
     WriterActivationComponent,
     RequestsListComponent,
     ReviewRequestComponent,
-    ReaderActivationComponent
+    ReaderActivationComponent,
+    SynopsesComponent,
+    SynopsisReviewComponent
 
   ],
     imports: [
