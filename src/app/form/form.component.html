@@ -23,7 +23,7 @@
     </mat-form-field>
 
     <select name={{field.id}} *ngIf="field.type.name=='enum'" formControlName={{field.id}}>
-      <option *ngFor="let val of selectElements" value={{val}}>
+      <option *ngFor="let val of selectElements" value={{val.value}}>
         {{val.viewValue}}
       </option>
     </select>
