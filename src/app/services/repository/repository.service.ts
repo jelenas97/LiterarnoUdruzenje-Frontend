@@ -38,4 +38,9 @@ export class RepositoryService {
     return this.httpClient.get('http://localhost:8080/registration/files/'.concat(processId)) as Observable<any>;
 
   }
+
+  getSynopses(processId: string) {
+    return this.httpClient.get('http://localhost:8080/bookPublishing/get/'.concat(processId)) as Observable<any>;
+
+  }
 }
