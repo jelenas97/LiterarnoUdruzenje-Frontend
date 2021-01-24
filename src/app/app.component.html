@@ -6,6 +6,7 @@
     <button class="navbar-brand" *ngIf = "boardMember"  (click)="getRequests()">Show requests</button>
     <button class="navbar-brand" *ngIf = "!unauthorized"  (click)="logout()">Logout</button>
     <button class="navbar-brand" *ngIf = "writer" (click)="startBookPublishingProcess()">Book publishing</button>
+    <button class="navbar-brand" *ngIf = "writer" (click)="showRequestsForWholeBook()">Requests for whole book</button>
     <button class="navbar-brand" *ngIf = "editor" (click)="getSubmitedSynopses()">Show synopses</button>
 
   </div>

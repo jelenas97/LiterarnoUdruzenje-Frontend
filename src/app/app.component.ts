@@ -66,7 +66,7 @@ export class AppComponent {
   }
 
   startBookPublishingProcess(){
-    this.camundaService.startBookPublishingProcess().subscribe( data => {
+    this.camundaService.startBookPublishingProcess(this.currUser.username).subscribe( data => {
       this.processDto = data;
       console.log(this.processDto);
       this.router.navigate(['/bookPublishing/' + this.processDto.processId]);
@@ -111,6 +111,10 @@ export class AppComponent {
       this.editor=true;
     }
 
+  }
+
+  showRequestsForWholeBook(){
+    this.router.navigate(['/wholeBookRequests']);
   }
 
   getSubmitedSynopses(){
