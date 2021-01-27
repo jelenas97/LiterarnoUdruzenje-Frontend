@@ -21,6 +21,8 @@ import { ReviewRequestComponent } from './review-request/review-request.componen
 import { ReaderActivationComponent } from './reader-activation/reader-activation.component';
 import { SynopsesComponent } from './synopses/synopses.component';
 import { SynopsisReviewComponent } from './synopsis-review/synopsis-review.component';
+import { WholeBookRequestsComponent } from './whole-book-requests/whole-book-requests.component';
+import { BookSubmissionComponent } from './book-submission/book-submission.component';
 
 
 const Routes = [
@@ -55,6 +57,14 @@ const Routes = [
   {
     path:'synopsisReview/:id',
     component: SynopsisReviewComponent, 
+  },
+  {
+    path:'wholeBookRequests',
+    component: WholeBookRequestsComponent,
+  },
+  {
+    path:'bookSubmission/:id',
+    component: BookSubmissionComponent, 
   }
 ];
 
@@ -69,7 +79,9 @@ const Routes = [
     ReviewRequestComponent,
     ReaderActivationComponent,
     SynopsesComponent,
-    SynopsisReviewComponent
+    SynopsisReviewComponent,
+    WholeBookRequestsComponent,
+    BookSubmissionComponent
 
   ],
     imports: [

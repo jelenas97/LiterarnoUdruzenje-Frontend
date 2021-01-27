@@ -18,8 +18,8 @@ export class CamundaService {
     return this.httpClient.get<ProcessDto>(`http://localhost:8080/registration/startWriter`);
   }
 
-  public startBookPublishingProcess() {
-    return this.httpClient.get<ProcessDto>(`http://localhost:8080/bookPublishing/startBookPublishing`);
+  public startBookPublishingProcess(email:string) {
+    return this.httpClient.get<ProcessDto>(`http://localhost:8080/bookPublishing/startBookPublishing/`.concat(email));
   }
 
   getUserTasks(username: string) {
