@@ -5,6 +5,8 @@
         <th scope="col">Task name</th>
         <th scope="col">Task assignee</th>
         <th scope="col">Creation date</th>
+        <th scope="col">Book title</th>
+        <th scope="col">Editor</th>
         <th scope="col"></th>
       </tr>
     </thead>
@@ -13,6 +15,8 @@
         <td>{{task.name}} </td>
         <td>{{task.assignee}} </td>
         <td>{{task.dateTime}} </td>
+        <td>{{task.variables.title}}</td>
+        <td>{{task.variables.chiefEditor}}</td>
         <td><button class="btn btn-info" (click)="showSubmissionForm(task.taskId)">Submisson form</button></td>
       </tr>
     </tbody>
