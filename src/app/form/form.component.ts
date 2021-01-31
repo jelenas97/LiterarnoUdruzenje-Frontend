@@ -1,3 +1,5 @@
+import { AuthService } from './../services/auth.service';
+import { CamundaService } from './../services/camunda/camunda.service';
 import { BookService } from './../services/bookService';
 import { Component, OnInit } from '@angular/core';
 import {RepositoryService} from '../services/repository/repository.service';
@@ -31,14 +33,17 @@ export class FormComponent implements OnInit {
   private cc: any;
   bookForm = false;
   synopsisReview=false;
+  currUser: any;
 
   selectElements: SelectElement[] = [];
   selectedFiles: FileList | undefined;
   private redirect = false;
+  private redirectFile = false;
+  private redirectBeta = false;
 
   constructor(private userService: UsersService, private repositoryService: RepositoryService,
              private route: ActivatedRoute, private router: Router, private fb: FormBuilder,
-             private bookService: BookService) {
+             private authService: AuthService, private camundaService: CamundaService) {
 
     this.createForm();
 
@@ -100,14 +105,27 @@ export class FormComponent implements OnInit {
     const p = new FormData();
     console.log(value);
     console.log(form);
+    console.log(this);
     for (const property in value) {
       console.log(property);
-      if(property==='decision'){
-        this.synopsisReview=true;
-      }
       if (property === 'betaReader'){
-        if (value[property] === true) {
+        if (value[property] === true ) {
           this.redirect = true;
+        }
+      }
+      if( property==='original_decision'){
+        if(value[property]==='true'){
+          this.redirectFile= true;
+        }
+      }
+      if(property ==='decision'){
+        if(value[property]==='decline'){
+          this.redirect=true;
+        }
+      }
+      if(property ==='original_approval'){
+        if(value[property]==='true'){
+          this.redirectBeta=true;
         }
       }
       if (value[property] instanceof Array) {
@@ -129,39 +147,19 @@ export class FormComponent implements OnInit {
         }
       );
     }
-    for (const property in value) {
-      if(property==='title'){
-        this.bookForm=true;
-        this.bookService.saveBook(o, this.formFieldsDto.taskId).subscribe(
-          res=>{
-            alert('Your form is submitted successfully!');
-            this.redirectTo('/homepage');
-          }
-        )
-        break;
-      }
-    }
-    for (const property in value) {
-      if(property==='decision'){
-        this.synopsisReview=true;
-        this.bookService.decideOnSynopsis(o, this.formFieldsDto.taskId).subscribe(
-          res=>{
-            alert('Your form is submitted successfully!');
-            this.redirectTo('/homepage');
-          }
-        )
-        break;
-      }
-    }
-    if (o.length !== 0 &&  !this.bookForm && !this.synopsisReview) {
+    if (o.length !== 0) {
       // @ts-ignore
       this.userService.registerUser(o, this.formFieldsDto.taskId).subscribe(
         res => {
           alert('Your form is submitted successfully!');
           if (this.redirect) {
             this.redirectTo('/registrate/' + this.processId);
+          }else if (this.redirectFile) {
+            this.redirectTo('/downloadList');
+          }else if (this.redirectBeta) {
+            this.redirectTo('/askBetaReaders');
           } else {
-            this.router.navigate(['/']);
+            this.router.navigate(['/homepage']);
           }
         },
         err => {
