@@ -17,4 +17,7 @@ export class BookService {
     return this.httpClient.post('http://localhost:8080/bookPublishing/post/'.concat(taskId), decision) as Observable<any>;
   }
 
+  getPlagiarisms(processId: string) {
+    return this.httpClient.get('http://localhost:8080/bookPublishing/getPlagiarisms/'.concat(processId)) as Observable<any>;
+  }
 }
