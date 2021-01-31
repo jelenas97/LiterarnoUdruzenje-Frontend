@@ -23,6 +23,12 @@ import { SynopsesComponent } from './synopses/synopses.component';
 import { SynopsisReviewComponent } from './synopsis-review/synopsis-review.component';
 import { WholeBookRequestsComponent } from './whole-book-requests/whole-book-requests.component';
 import { BookSubmissionComponent } from './book-submission/book-submission.component';
+import { PlagiarismDecisionComponent } from './plagiarism-decision/plagiarism-decision.component';
+import { PlagiarismDetectionComponent } from './plagiarism-detection/plagiarism-detection.component';
+import { DownloadListComponent } from './download-list/download-list.component';
+import { DownloadAndDecideComponent } from './download-and-decide/download-and-decide.component';
+import { AskBetaReadersComponent } from './ask-beta-readers/ask-beta-readers.component';
+import { ChooseBetaReadersComponent } from './choose-beta-readers/choose-beta-readers.component';
 
 
 const Routes = [
@@ -65,6 +71,26 @@ const Routes = [
   {
     path:'bookSubmission/:id',
     component: BookSubmissionComponent, 
+  },
+  {
+    path:'plagiarismDetection',
+    component: PlagiarismDetectionComponent, 
+  },
+  {
+    path:'plagiarismDecision/:id',
+    component: PlagiarismDecisionComponent, 
+  },{
+    path:'downloadAndDecide/:id',
+    component: DownloadAndDecideComponent, 
+  },{
+    path:'downloadList',
+    component: DownloadListComponent, 
+  },{
+    path:'askBetaReaders',
+    component:AskBetaReadersComponent, 
+  },{
+    path:'chooseBetaReaders',
+    component:ChooseBetaReadersComponent, 
   }
 ];
 
@@ -81,8 +107,13 @@ const Routes = [
     SynopsesComponent,
     SynopsisReviewComponent,
     WholeBookRequestsComponent,
-    BookSubmissionComponent
-
+    BookSubmissionComponent,
+    PlagiarismDetectionComponent,
+    PlagiarismDecisionComponent,
+    DownloadListComponent,
+    DownloadAndDecideComponent,
+    AskBetaReadersComponent,
+    ChooseBetaReadersComponent
   ],
     imports: [
         BrowserModule,
