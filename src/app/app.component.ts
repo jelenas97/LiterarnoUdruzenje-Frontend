@@ -113,6 +113,10 @@ export class AppComponent {
 
   }
 
+  getDetectedPlagiarisms(){
+    this.router.navigate(['/plagiarismDetection']);
+  }
+
   showRequestsForWholeBook(){
     this.router.navigate(['/wholeBookRequests']);
   }
@@ -129,6 +133,18 @@ export class AppComponent {
   getRequests() {
     this.router.navigate(['/requests']);
 
+  }
+
+  downloadList(){
+    this.router.navigate(['/downloadList']);
+  }
+
+  askBetaReaders(){
+    this.router.navigate(['/askBetaReaders']);
+  }
+
+  chooseBetaReaders(){
+    this.router.navigate(['/chooseBetaReaders']);
   }
 
 }
