@@ -29,6 +29,7 @@ import { DownloadListComponent } from './download-list/download-list.component';
 import { DownloadAndDecideComponent } from './download-and-decide/download-and-decide.component';
 import { AskBetaReadersComponent } from './ask-beta-readers/ask-beta-readers.component';
 import { ChooseBetaReadersComponent } from './choose-beta-readers/choose-beta-readers.component';
+import { LeaveCommentsComponent } from './leave-comments/leave-comments.component';
 
 
 const Routes = [
@@ -91,6 +92,9 @@ const Routes = [
   },{
     path:'chooseBetaReaders',
     component:ChooseBetaReadersComponent, 
+  },{
+    path:'leaveComments',
+    component:LeaveCommentsComponent,
   }
 ];
 
@@ -113,7 +117,8 @@ const Routes = [
     DownloadListComponent,
     DownloadAndDecideComponent,
     AskBetaReadersComponent,
-    ChooseBetaReadersComponent
+    ChooseBetaReadersComponent,
+    LeaveCommentsComponent
   ],
     imports: [
         BrowserModule,

@@ -147,5 +147,8 @@ export class AppComponent {
     this.router.navigate(['/chooseBetaReaders']);
   }
 
+  leaveComments(){
+    this.router.navigate(['/leaveComments']);
+  }
 }
 
