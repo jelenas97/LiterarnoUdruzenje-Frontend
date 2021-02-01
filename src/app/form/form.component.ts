@@ -40,6 +40,7 @@ export class FormComponent implements OnInit {
   private redirect = false;
   private redirectFile = false;
   private redirectBeta = false;
+  private redirectChoose = false;
 
   constructor(private userService: UsersService, private repositoryService: RepositoryService,
              private route: ActivatedRoute, private router: Router, private fb: FormBuilder,
@@ -128,6 +129,11 @@ export class FormComponent implements OnInit {
           this.redirectBeta=true;
         }
       }
+      if(property ==='wantBetaReaders'){
+        if(value[property]==='true'){
+          this.redirectChoose=true;
+        }
+      }
       if (value[property] instanceof Array) {
         o.push({fieldId: property, fieldValues: value[property]});
       } else if (property !== 'files') {
@@ -158,6 +164,8 @@ export class FormComponent implements OnInit {
             this.redirectTo('/downloadList');
           }else if (this.redirectBeta) {
             this.redirectTo('/askBetaReaders');
+          }else if (this.redirectChoose) {
+            this.redirectTo('/chooseBetaReaders');
           } else {
             this.router.navigate(['/homepage']);
           }
