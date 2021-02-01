@@ -14,8 +14,7 @@ export class SynopsesComponent implements OnInit {
   tasks: any;
   currUser: any;
 
-  constructor(private camundaService: CamundaService, private router: Router, private authService: AuthService,
-     private repositoryService: RepositoryService) {
+  constructor(private camundaService: CamundaService, private router: Router, private authService: AuthService) {
     this.currUser=this.authService.getCurrUser().username;
    }
 
