@@ -25,10 +25,9 @@ export class AskBetaReadersComponent implements OnInit {
       res => {
         console.log(res);
         for (const i in res){
-          /*if(res[i].name=='Decision on sending beta-readers'){
-            
-          }*/
-          this.tasks.push(res[i]);
+          if(res[i].name=='Decision on sending beta-readers'){
+            this.tasks.push(res[i]);
+          }
         }
       },
       err => {
