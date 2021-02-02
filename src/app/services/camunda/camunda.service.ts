@@ -25,4 +25,9 @@ export class CamundaService {
   getUserTasks(username: string) {
     return this.httpClient.get('http://localhost:8080/user/tasks/'.concat(username));
   }
+
+  getBookComments(processId: string) {
+    return this.httpClient.get('http://localhost:8080/bookPublishing/comments/'.concat(processId)) as Observable<any>;
+
+  }
 }

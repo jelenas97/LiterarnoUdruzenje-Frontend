@@ -13,7 +13,7 @@ export class DownloadListComponent implements OnInit {
   tasks: any;
   currUser: any;
 
-  constructor(private camundaService: CamundaService, private router: Router, private authService: AuthService) { 
+  constructor(private camundaService: CamundaService, private router: Router, private authService: AuthService) {
       this.currUser=this.authService.getCurrUser().username;
      }
 
@@ -25,7 +25,7 @@ export class DownloadListComponent implements OnInit {
       res => {
         console.log(res);
         for (const i in res){
-          if(res[i].name=='Download and decide'){
+          if(res[i].name=='Download and decide' || res[i].name=='Decision on more changes'){
             this.tasks.push(res[i]);
           }
         }

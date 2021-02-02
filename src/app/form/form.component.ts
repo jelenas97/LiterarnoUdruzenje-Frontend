@@ -41,6 +41,7 @@ export class FormComponent implements OnInit {
   private redirectFile = false;
   private redirectBeta = false;
   private redirectChoose = false;
+  private onlyFiles = false;
 
   constructor(private userService: UsersService, private repositoryService: RepositoryService,
              private route: ActivatedRoute, private router: Router, private fb: FormBuilder,
@@ -104,9 +105,7 @@ export class FormComponent implements OnInit {
   onSubmit(value, form) {
     const o = new Array();
     const p = new FormData();
-    console.log(value);
-    console.log(form);
-    console.log(this);
+
     for (const property in value) {
       console.log(property);
       if (property === 'betaReader'){
@@ -134,6 +133,9 @@ export class FormComponent implements OnInit {
           this.redirectChoose=true;
         }
       }
+      if(property === 'files' || property === "changedBook") {
+        this.onlyFiles = true;
+      }
       if (value[property] instanceof Array) {
         o.push({fieldId: property, fieldValues: value[property]});
       } else if (property !== 'files') {
@@ -153,7 +155,7 @@ export class FormComponent implements OnInit {
         }
       );
     }
-    if (o.length !== 0) {
+    if (o.length !== 0 && !this.onlyFiles) {
       // @ts-ignore
       this.userService.registerUser(o, this.formFieldsDto.taskId).subscribe(
         res => {
@@ -176,7 +178,7 @@ export class FormComponent implements OnInit {
           alert(this.errorMessage);
         }
       );
-      
+
     }
 
   }

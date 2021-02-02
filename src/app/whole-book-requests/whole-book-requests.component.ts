@@ -21,18 +21,22 @@ export class WholeBookRequestsComponent implements OnInit {
 
   ngOnInit(): void {
     const x = this.camundaService.getUserTasks(this.currUser);
+    this.tasks = [];
     console.log(this.currUser);
     x.subscribe(
       res => {
-        console.log(res);
-        this.tasks = res;
+        for (const i in res){
+          if(res[i].name=='Submit the entire book'){
+            this.tasks.push(res[i]);
+          }
+        }
       },
       err => {
         console.log('Error occured');
       }
     );
   }
- 
+
   showSubmissionForm(taskId: any) {
     this.router.navigate(['/bookSubmission/' + taskId]);
 
