@@ -30,4 +30,12 @@ export class CamundaService {
     return this.httpClient.get('http://localhost:8080/bookPublishing/comments/'.concat(processId)) as Observable<any>;
 
   }
+
+  getLectorCorrections(processId: string) {
+    return this.httpClient.get('http://localhost:8080/bookPublishing/lectorCorrections/'.concat(processId)) as Observable<any>;
+  }
+
+  getEditorSuggestions(processId: string){
+    return this.httpClient.get('http://localhost:8080/bookPublishing/editorSuggestions/'.concat(processId)) as Observable<any>;
+  }
 }
