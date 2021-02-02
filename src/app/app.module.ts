@@ -32,6 +32,12 @@ import { ChooseBetaReadersComponent } from './choose-beta-readers/choose-beta-re
 import { LeaveCommentsComponent } from './leave-comments/leave-comments.component';
 import { ChangeBookCommentsComponent } from './change-book-comments/change-book-comments.component';
 import { CommentsUploadComponent } from './change-book-comments/comments-upload/comments-upload.component';
+import { LectorBooksComponent } from './lector-books/lector-books.component';
+import { LectorsCorrectionListComponent } from './lectors-correction-list/lectors-correction-list.component';
+import { LectorBasedBookUpdateComponent } from './lector-based-book-update/lector-based-book-update.component';
+import { PrintDecisionListComponent } from './print-decision-list/print-decision-list.component';
+import { FinalCorrectionsComponent } from './final-corrections/final-corrections.component';
+import { FinalCorrectionComponent } from './final-correction/final-correction.component';
 
 
 const Routes = [
@@ -103,7 +109,26 @@ const Routes = [
   },{
     path:'uploadByComments/:id',
     component: CommentsUploadComponent,
+  },{
+    path:'lectorBooks',
+    component:  LectorBooksComponent,
+  },{
+    path:'lectorCorrections',
+    component:  LectorsCorrectionListComponent,
+  },{
+    path:'lectorCorrections/:id',
+    component: LectorBasedBookUpdateComponent,
+  },{
+    path:'printList',
+    component: PrintDecisionListComponent,
+  },{
+    path:'finalCorrections',
+    component: FinalCorrectionsComponent,
+  },{
+    path:'finalCorrections/:id',
+    component: FinalCorrectionComponent,
   }
+
 ];
 
 @NgModule({
@@ -128,7 +153,13 @@ const Routes = [
     ChooseBetaReadersComponent,
     LeaveCommentsComponent,
     ChangeBookCommentsComponent,
-    CommentsUploadComponent
+    CommentsUploadComponent,
+    LectorBooksComponent,
+    LectorsCorrectionListComponent,
+    LectorBasedBookUpdateComponent,
+    PrintDecisionListComponent,
+    FinalCorrectionsComponent,
+    FinalCorrectionComponent
   ],
     imports: [
         BrowserModule,
