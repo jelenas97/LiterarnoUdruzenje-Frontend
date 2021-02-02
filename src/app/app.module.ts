@@ -30,6 +30,8 @@ import { DownloadAndDecideComponent } from './download-and-decide/download-and-d
 import { AskBetaReadersComponent } from './ask-beta-readers/ask-beta-readers.component';
 import { ChooseBetaReadersComponent } from './choose-beta-readers/choose-beta-readers.component';
 import { LeaveCommentsComponent } from './leave-comments/leave-comments.component';
+import { ChangeBookCommentsComponent } from './change-book-comments/change-book-comments.component';
+import { CommentsUploadComponent } from './change-book-comments/comments-upload/comments-upload.component';
 
 
 const Routes = [
@@ -63,7 +65,7 @@ const Routes = [
   },
   {
     path:'synopsisReview/:id',
-    component: SynopsisReviewComponent, 
+    component: SynopsisReviewComponent,
   },
   {
     path:'wholeBookRequests',
@@ -71,30 +73,36 @@ const Routes = [
   },
   {
     path:'bookSubmission/:id',
-    component: BookSubmissionComponent, 
+    component: BookSubmissionComponent,
   },
   {
     path:'plagiarismDetection',
-    component: PlagiarismDetectionComponent, 
+    component: PlagiarismDetectionComponent,
   },
   {
     path:'plagiarismDecision/:id',
-    component: PlagiarismDecisionComponent, 
+    component: PlagiarismDecisionComponent,
   },{
     path:'downloadAndDecide/:id',
-    component: DownloadAndDecideComponent, 
+    component: DownloadAndDecideComponent,
   },{
     path:'downloadList',
-    component: DownloadListComponent, 
+    component: DownloadListComponent,
   },{
     path:'askBetaReaders',
-    component:AskBetaReadersComponent, 
+    component:AskBetaReadersComponent,
   },{
     path:'chooseBetaReaders',
-    component:ChooseBetaReadersComponent, 
+    component:ChooseBetaReadersComponent,
   },{
     path:'leaveComments',
     component:LeaveCommentsComponent,
+  },{
+    path:'changeBookComments',
+    component:ChangeBookCommentsComponent,
+  },{
+    path:'uploadByComments/:id',
+    component: CommentsUploadComponent,
   }
 ];
 
@@ -118,7 +126,9 @@ const Routes = [
     DownloadAndDecideComponent,
     AskBetaReadersComponent,
     ChooseBetaReadersComponent,
-    LeaveCommentsComponent
+    LeaveCommentsComponent,
+    ChangeBookCommentsComponent,
+    CommentsUploadComponent
   ],
     imports: [
         BrowserModule,

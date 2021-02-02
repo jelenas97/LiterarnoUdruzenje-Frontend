@@ -150,5 +150,10 @@ export class AppComponent {
   leaveComments(){
     this.router.navigate(['/leaveComments']);
   }
+
+  readCommentsAndChangeBook() {
+    this.router.navigate(['/changeBookComments']);
+
+  }
 }
 

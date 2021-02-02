@@ -7,6 +7,7 @@
     <button class="navbar-brand" *ngIf = "!unauthorized"  (click)="logout()">Logout</button>
     <button class="navbar-brand" *ngIf = "writer" (click)="startBookPublishingProcess()">Book publishing</button>
     <button class="navbar-brand" *ngIf = "writer" (click)="showRequestsForWholeBook()">Requests for whole book</button>
+    <button class="navbar-brand" *ngIf = "writer" (click)="readCommentsAndChangeBook()">Read comments and change book</button>
     <button class="navbar-brand" *ngIf = "editor" (click)="getSubmitedSynopses()">Show synopses</button>
     <button class="navbar-brand" *ngIf = "editor" (click)="getDetectedPlagiarisms()">Plagiarism detection</button>
     <button class="navbar-brand" *ngIf = "editor" (click)="downloadList()">Download list</button>
