@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {CamundaService} from './services/camunda/camunda.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Router} from '@angular/router';
 import {ProcessDto} from './dto/processDto';
 import { User } from './shared/model/user';
 import { AuthService } from './services/auth.service';
@@ -21,6 +21,7 @@ export class AppComponent {
   boardMember: boolean | undefined;
   writer: boolean | undefined;
   editor: boolean | undefined;
+  lector: boolean | undefined;
   // itd
 
 
@@ -40,13 +41,13 @@ export class AppComponent {
       this.boardMember= false;
       this.writer= false;
       this.editor=false;
+      this.lector=false;
       //
     }else{
       if(this.currUser.roles!= null){
         this.set();
       }
     }
-    //this.router.navigate(['login']);
   }
 
   startReaderRegistrationProcess() {
@@ -81,6 +82,7 @@ export class AppComponent {
       this.boardMember=false;
       this.writer=true;
       this.editor=false;
+      this.lector=false;
     } else if (this.currUser?.roles.includes("READER")){
       this.unauthorized=false;
       this.reader=true;
@@ -88,6 +90,7 @@ export class AppComponent {
       this.boardMember=false;
       this.writer=false;
       this.editor=false;
+      this.lector=false;
     } else if (this.currUser?.roles.includes("BETAREADER")){
       this.unauthorized=false;
       this.reader=false;
@@ -95,6 +98,7 @@ export class AppComponent {
       this.boardMember=false;
       this.writer=false;
       this.editor=false;
+      this.lector=false;
     } else if (this.currUser?.roles.includes("BOARDMEMBER")){
       this.unauthorized=false;
       this.reader=false;
@@ -102,6 +106,7 @@ export class AppComponent {
       this.boardMember=true;
       this.writer=false;
       this.editor=false;
+      this.lector=false;
     } else if (this.currUser?.roles.includes("EDITOR")){
       this.unauthorized=false;
       this.reader=false;
@@ -109,8 +114,21 @@ export class AppComponent {
       this.boardMember=false;
       this.writer=false;
       this.editor=true;
+      this.lector=false;
+    } else if (this.currUser?.roles.includes("LECTOR")){
+      this.unauthorized=false;
+      this.reader=false;
+      this.betaReader=false;
+      this.boardMember=false;
+      this.writer=false;
+      this.editor=false;
+      this.lector=true;
     }
 
+  }
+
+  getDetectedPlagiarisms(){
+    this.router.navigate(['/plagiarismDetection']);
   }
 
   showRequestsForWholeBook(){
@@ -131,5 +149,41 @@ export class AppComponent {
 
   }
 
+  downloadList(){
+    this.router.navigate(['/downloadList']);
+  }
+
+  askBetaReaders(){
+    this.router.navigate(['/askBetaReaders']);
+  }
+
+  chooseBetaReaders(){
+    this.router.navigate(['/chooseBetaReaders']);
+  }
+
+  leaveComments(){
+    this.router.navigate(['/leaveComments']);
+  }
+
+  readCommentsAndChangeBook() {
+    this.router.navigate(['/changeBookComments']);
+
+  }
+  lectorBooks() {
+    this.router.navigate(['/lectorBooks']);
+
+  }
+  lectorCorrections() {
+    this.router.navigate(['/lectorCorrections']);
+
+  }
+  printList() {
+    this.router.navigate(['/printList']);
+
+  }
+
+  finalCorrections(){
+    this.router.navigate(['/finalCorrections']);
+  }
 }
 

@@ -1,22 +1,21 @@
-import { RepositoryService } from './../services/repository/repository.service';
-import { AuthService } from './../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import {CamundaService} from '../services/camunda/camunda.service';
 import {Router} from '@angular/router';
+import {AuthService} from '../services/auth.service';
 
 @Component({
-  selector: 'app-synopses',
-  templateUrl: './synopses.component.html',
-  styleUrls: ['./synopses.component.css']
+  selector: 'app-change-book-comments',
+  templateUrl: './change-book-comments.component.html',
+  styleUrls: ['./change-book-comments.component.css']
 })
-export class SynopsesComponent implements OnInit {
+export class ChangeBookCommentsComponent implements OnInit {
 
   tasks: any;
   currUser: any;
 
   constructor(private camundaService: CamundaService, private router: Router, private authService: AuthService) {
     this.currUser=this.authService.getCurrUser().username;
-   }
+  }
 
   ngOnInit(): void {
     this.tasks= [];
@@ -26,7 +25,7 @@ export class SynopsesComponent implements OnInit {
       res => {
         console.log(res);
         for (const i in res){
-          if(res[i].name=='Review the book details'){
+          if(res[i].name=='Change book the based on comments'){
             this.tasks.push(res[i]);
           }
         }
@@ -37,8 +36,8 @@ export class SynopsesComponent implements OnInit {
     );
   }
 
-  synopsisReview(procesId: any) {
-    this.router.navigate(['/synopsisReview/' + procesId]);
+  changeBook(piId: any) {
+    this.router.navigate(['/uploadByComments/' + piId]);
 
   }
 }

@@ -5,28 +5,27 @@ import { CamundaService } from '../services/camunda/camunda.service';
 import { RepositoryService } from '../services/repository/repository.service';
 
 @Component({
-  selector: 'app-whole-book-requests',
-  templateUrl: './whole-book-requests.component.html',
-  styleUrls: ['./whole-book-requests.component.css']
+  selector: 'app-ask-beta-readers',
+  templateUrl: './ask-beta-readers.component.html',
+  styleUrls: ['./ask-beta-readers.component.css']
 })
-export class WholeBookRequestsComponent implements OnInit {
+export class AskBetaReadersComponent implements OnInit {
 
   tasks: any;
   currUser: any;
 
-  constructor(private camundaService: CamundaService, private router: Router, private authService: AuthService,
-    private repositoryService: RepositoryService) {
+  constructor(private camundaService: CamundaService, private router: Router, private authService: AuthService) {
       this.currUser=this.authService.getCurrUser().username;
      }
 
   ngOnInit(): void {
+    this.tasks= [];
     const x = this.camundaService.getUserTasks(this.currUser);
-    this.tasks = [];
-    console.log(this.currUser);
     x.subscribe(
       res => {
+        console.log(res);
         for (const i in res){
-          if(res[i].name=='Submit the entire book'){
+          if(res[i].name=='Decision on sending beta-readers'){
             this.tasks.push(res[i]);
           }
         }
@@ -35,10 +34,12 @@ export class WholeBookRequestsComponent implements OnInit {
         console.log('Error occured');
       }
     );
-  }
+ 
+}
 
-  showSubmissionForm(taskId: any) {
-    this.router.navigate(['/bookSubmission/' + taskId]);
+pickBetaReaders(processId: any) {
+  this.router.navigate(['/registrate/' + processId]);
 
-  }
+}
+
 }

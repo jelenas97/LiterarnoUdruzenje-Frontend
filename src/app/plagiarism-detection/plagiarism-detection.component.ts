@@ -5,11 +5,11 @@ import { CamundaService } from '../services/camunda/camunda.service';
 import { RepositoryService } from '../services/repository/repository.service';
 
 @Component({
-  selector: 'app-whole-book-requests',
-  templateUrl: './whole-book-requests.component.html',
-  styleUrls: ['./whole-book-requests.component.css']
+  selector: 'app-plagiarism-detection',
+  templateUrl: './plagiarism-detection.component.html',
+  styleUrls: ['./plagiarism-detection.component.css']
 })
-export class WholeBookRequestsComponent implements OnInit {
+export class PlagiarismDetectionComponent implements OnInit {
 
   tasks: any;
   currUser: any;
@@ -20,13 +20,13 @@ export class WholeBookRequestsComponent implements OnInit {
      }
 
   ngOnInit(): void {
+    this.tasks= [];
     const x = this.camundaService.getUserTasks(this.currUser);
-    this.tasks = [];
-    console.log(this.currUser);
     x.subscribe(
       res => {
+        console.log(res);
         for (const i in res){
-          if(res[i].name=='Submit the entire book'){
+          if(res[i].name=='Decision on plagiarism'){
             this.tasks.push(res[i]);
           }
         }
@@ -36,9 +36,10 @@ export class WholeBookRequestsComponent implements OnInit {
       }
     );
   }
-
-  showSubmissionForm(taskId: any) {
-    this.router.navigate(['/bookSubmission/' + taskId]);
+   
+  showPlagiarismDecision(taskId: any) {
+    this.router.navigate(['/plagiarismDecision/' + taskId]);
 
   }
+
 }
