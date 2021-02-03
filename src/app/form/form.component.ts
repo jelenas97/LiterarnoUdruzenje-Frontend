@@ -139,7 +139,9 @@ export class FormComponent implements OnInit {
       if (value[property] instanceof Array) {
         o.push({fieldId: property, fieldValues: value[property]});
       } else if (property !== 'files') {
-        o.push({fieldId: property, fieldValue: value[property]});
+        if (property !== 'moreFiles') {
+          o.push({fieldId: property, fieldValue: value[property]});
+        }
       }
     }
     if (this.selectedFiles?.length !== 0 && this.selectedFiles !== undefined) {
@@ -150,7 +152,9 @@ export class FormComponent implements OnInit {
           this.router.navigate(['/']);
         },
         err => {
-
+          this.errorMessage = err.error.message;
+          console.log(err);
+          alert(this.errorMessage);
           alert('Files not uploaded successfully, try again!');
         }
       );

@@ -46,6 +46,10 @@ const Routes = [
     component: FormComponent,
   },
   {
+    path: 'pay/:id',
+    component: FormComponent,
+  },
+  {
     path: 'reviewRequest/:id',
     component: ReviewRequestComponent,
   },
