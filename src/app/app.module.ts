@@ -31,6 +31,10 @@ const Routes = [
     component: FormComponent,
   },
   {
+    path: 'pay/:id',
+    component: FormComponent,
+  },
+  {
     path: 'reviewRequest/:id',
     component: ReviewRequestComponent,
   },
@@ -56,7 +60,7 @@ const Routes = [
   },
   {
     path:'synopsisReview/:id',
-    component: SynopsisReviewComponent, 
+    component: SynopsisReviewComponent,
   },
   {
     path:'wholeBookRequests',
@@ -64,7 +68,7 @@ const Routes = [
   },
   {
     path:'bookSubmission/:id',
-    component: BookSubmissionComponent, 
+    component: BookSubmissionComponent,
   }
 ];
 
