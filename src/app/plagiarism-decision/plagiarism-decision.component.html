@@ -1,0 +1,11 @@
+<h1>Plagiarism decision</h1>
+<div class="style">
+<div><b>Book title:</b> {{bookDetails.title}}</div>
+<br>
+<div><b>Writer:</b> {{bookDetails.writer}}</div>
+<br>
+<div><b>Detected plagiarisms:</b> </div>
+<br>
+<li *ngFor="let book of plagiarisms">{{book}}</li>
+</div>
+<app-form></app-form>

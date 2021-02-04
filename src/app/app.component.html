@@ -8,8 +8,18 @@
     <button class="navbar-brand" *ngIf = "!unauthorized"  (click)="logout()">Logout</button>
     <button class="navbar-brand" *ngIf = "writer" (click)="startBookPublishingProcess()">Book publishing</button>
     <button class="navbar-brand" *ngIf = "writer" (click)="showRequestsForWholeBook()">Requests for whole book</button>
+    <button class="navbar-brand" *ngIf = "writer" (click)="readCommentsAndChangeBook()">Read comments and change book</button>
+    <button class="navbar-brand" *ngIf = "writer" (click)="lectorCorrections()">Lector corrections</button>
+    <button class="navbar-brand" *ngIf = "writer" (click)="finalCorrections()">Final corrections</button>
     <button class="navbar-brand" *ngIf = "writer" (click)="startPlagiarismProcess()">Report plagiarism</button>
     <button class="navbar-brand" *ngIf = "editor" (click)="getSubmitedSynopses()">Show synopses</button>
+    <button class="navbar-brand" *ngIf = "editor" (click)="getDetectedPlagiarisms()">Plagiarism detection</button>
+    <button class="navbar-brand" *ngIf = "editor" (click)="downloadList()">Download list</button>
+    <button class="navbar-brand" *ngIf = "editor" (click)="askBetaReaders()">Ask beta-readers</button>
+    <button class="navbar-brand" *ngIf = "editor" (click)="chooseBetaReaders()">Choose beta-readers</button>
+    <button class="navbar-brand" *ngIf = "editor" (click)="printList()">Print list</button>
+    <button class="navbar-brand" *ngIf = "betaReader" (click)="leaveComments()">Leave comments</button>
+    <button class="navbar-brand" *ngIf = "lector" (click)="lectorBooks()">Lector books</button>
     <button class="navbar-brand" *ngIf = "editor" (click)="getPlagiarismComplains()">Show plagiarism complains</button>
     <button class="navbar-brand" *ngIf = "editor" (click)="writeNotes()">Write notes for plagiarisms</button>
 

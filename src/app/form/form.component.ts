@@ -1,3 +1,5 @@
+import { AuthService } from './../services/auth.service';
+import { CamundaService } from './../services/camunda/camunda.service';
 import { BookService } from './../services/bookService';
 import { Component, OnInit } from '@angular/core';
 import {RepositoryService} from '../services/repository/repository.service';
@@ -32,14 +34,19 @@ export class FormComponent implements OnInit {
   angForm: FormGroup;
   bookForm = false;
   synopsisReview=false;
+  currUser: any;
 
   selectElements: SelectElement[] = [];
   selectedFiles: FileList | undefined;
   private redirect = false;
+  private redirectFile = false;
+  private redirectBeta = false;
+  private redirectChoose = false;
+  private onlyFiles = false;
 
   constructor(private userService: UsersService, private repositoryService: RepositoryService,
              private route: ActivatedRoute, private router: Router, private fb: FormBuilder,
-             private bookService: BookService) {
+             private authService: AuthService, private camundaService: CamundaService) {
 
     this.createForm();
     this.route.paramMap.subscribe(params => {
@@ -99,22 +106,43 @@ export class FormComponent implements OnInit {
   onSubmit(value, form) {
     const o = new Array();
     const p = new FormData();
-    console.log(value);
-    console.log(form);
+
     for (const property in value) {
       console.log(property);
-      if(property==='decision'){
-        this.synopsisReview=true;
-      }
       if (property === 'betaReader'){
-        if (value[property] === true) {
+        if (value[property] === true ) {
           this.redirect = true;
         }
+      }
+      if( property==='original_decision'){
+        if(value[property]==='true'){
+          this.redirectFile= true;
+        }
+      }
+      if(property ==='decision'){
+        if(value[property]==='decline'){
+          this.redirect=true;
+        }
+      }
+      if(property ==='original_approval'){
+        if(value[property]==='true'){
+          this.redirectBeta=true;
+        }
+      }
+      if(property ==='wantBetaReaders'){
+        if(value[property]==='true'){
+          this.redirectChoose=true;
+        }
+      }
+      if(property === 'files' || property === "changedBook") {
+        this.onlyFiles = true;
       }
       if (value[property] instanceof Array) {
         o.push({fieldId: property, fieldValues: value[property]});
       } else if (property !== 'files') {
-        o.push({fieldId: property, fieldValue: value[property]});
+        if (property !== 'moreFiles') {
+          o.push({fieldId: property, fieldValue: value[property]});
+        }
       }
     }
     if (this.selectedFiles?.length !== 0 && this.selectedFiles !== undefined) {
@@ -125,44 +153,28 @@ export class FormComponent implements OnInit {
           this.router.navigate(['/']);
         },
         err => {
-
+          this.errorMessage = err.error.message;
+          console.log(err);
+          alert(this.errorMessage);
           alert('Files not uploaded successfully, try again!');
         }
       );
     }
-    for (const property in value) {
-      if(property==='title'){
-        this.bookForm=true;
-        this.bookService.saveBook(o, this.formFieldsDto.taskId).subscribe(
-          res=>{
-            alert('Your form is submitted successfully!');
-            this.redirectTo('/homepage');
-          }
-        )
-        break;
-      }
-    }
-    for (const property in value) {
-      if(property==='decision'){
-        this.synopsisReview=true;
-        this.bookService.decideOnSynopsis(o, this.formFieldsDto.taskId).subscribe(
-          res=>{
-            alert('Your form is submitted successfully!');
-            this.redirectTo('/homepage');
-          }
-        )
-        break;
-      }
-    }
-    if (o.length !== 0 &&  !this.bookForm && !this.synopsisReview) {
+    if (o.length !== 0 && !this.onlyFiles) {
       // @ts-ignore
       this.userService.registerUser(o, this.formFieldsDto.taskId).subscribe(
         res => {
           alert('Your form is submitted successfully!');
           if (this.redirect) {
             this.redirectTo('/registrate/' + this.processId);
+          }else if (this.redirectFile) {
+            this.redirectTo('/downloadList');
+          }else if (this.redirectBeta) {
+            this.redirectTo('/askBetaReaders');
+          }else if (this.redirectChoose) {
+            this.redirectTo('/chooseBetaReaders');
           } else {
-            this.router.navigate(['/']);
+            this.router.navigate(['/homepage']);
           }
         },
         err => {

@@ -20,11 +20,11 @@ export class WriterActivationComponent implements OnInit {
         res => {
           alert('Activation succeded');
           this.router.navigate(['/registrate/' + this.processId]);
-        });
         },
         err => {
-          alert('Activation failed');
-        }
+          this.router.navigate(['/registrate/' + this.processId]);
+        });
+      }
       );
 
     }

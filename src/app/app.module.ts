@@ -27,6 +27,21 @@ import {PlagiarismComplainsComponent} from './plagiarism-complains/plagiarism-co
 import {WriteNotesComponent} from './write-notes/write-notes.component';
 import {PlagiarismFinalDecisionComponent} from './plagiarism-final-decision/plagiarism-final-decision.component';
 import {AllPlagiarismsComponent} from './all-plagiarisms/all-plagiarisms.component';
+import { PlagiarismDecisionComponent } from './plagiarism-decision/plagiarism-decision.component';
+import { PlagiarismDetectionComponent } from './plagiarism-detection/plagiarism-detection.component';
+import { DownloadListComponent } from './download-list/download-list.component';
+import { DownloadAndDecideComponent } from './download-and-decide/download-and-decide.component';
+import { AskBetaReadersComponent } from './ask-beta-readers/ask-beta-readers.component';
+import { ChooseBetaReadersComponent } from './choose-beta-readers/choose-beta-readers.component';
+import { LeaveCommentsComponent } from './leave-comments/leave-comments.component';
+import { ChangeBookCommentsComponent } from './change-book-comments/change-book-comments.component';
+import { CommentsUploadComponent } from './change-book-comments/comments-upload/comments-upload.component';
+import { LectorBooksComponent } from './lector-books/lector-books.component';
+import { LectorsCorrectionListComponent } from './lectors-correction-list/lectors-correction-list.component';
+import { LectorBasedBookUpdateComponent } from './lector-based-book-update/lector-based-book-update.component';
+import { PrintDecisionListComponent } from './print-decision-list/print-decision-list.component';
+import { FinalCorrectionsComponent } from './final-corrections/final-corrections.component';
+import { FinalCorrectionComponent } from './final-correction/final-correction.component';
 
 
 const Routes = [
@@ -36,6 +51,10 @@ const Routes = [
   },
   {
     path: 'chooseEditors/:id',
+    component: FormComponent,
+  },
+  {
+    path: 'pay/:id',
     component: FormComponent,
   },
   {
@@ -75,6 +94,66 @@ const Routes = [
     component: BookSubmissionComponent,
   },
   {
+    path:'plagiarismDetection',
+    component: PlagiarismDetectionComponent,
+  },
+  {
+    path:'plagiarismDecision/:id',
+    component: PlagiarismDecisionComponent,
+  },
+  {
+    path:'downloadAndDecide/:id',
+    component: DownloadAndDecideComponent,
+  },
+  {
+    path:'downloadList',
+    component: DownloadListComponent,
+  },
+  {
+    path:'askBetaReaders',
+    component:AskBetaReadersComponent,
+  },
+  {
+    path:'chooseBetaReaders',
+    component:ChooseBetaReadersComponent,
+  },
+  {
+    path:'leaveComments',
+    component:LeaveCommentsComponent,
+  },
+  {
+    path:'changeBookComments',
+    component:ChangeBookCommentsComponent,
+  },
+  {
+    path:'uploadByComments/:id',
+    component: CommentsUploadComponent,
+  },
+  {
+    path:'lectorBooks',
+    component:  LectorBooksComponent,
+  },
+  {
+    path:'lectorCorrections',
+    component:  LectorsCorrectionListComponent,
+  },
+  {
+    path:'lectorCorrections/:id',
+    component: LectorBasedBookUpdateComponent,
+  },
+  {
+    path:'printList',
+    component: PrintDecisionListComponent,
+  },
+  {
+    path:'finalCorrections',
+    component: FinalCorrectionsComponent,
+  },
+  {
+    path:'finalCorrections/:id',
+    component: FinalCorrectionComponent,
+  },
+  {
     path: 'plagiarism/:id',
     component: FormComponent,
   },
@@ -110,6 +189,21 @@ const Routes = [
     SynopsisReviewComponent,
     WholeBookRequestsComponent,
     BookSubmissionComponent,
+    PlagiarismDetectionComponent,
+    PlagiarismDecisionComponent,
+    DownloadListComponent,
+    DownloadAndDecideComponent,
+    AskBetaReadersComponent,
+    ChooseBetaReadersComponent,
+    LeaveCommentsComponent,
+    ChangeBookCommentsComponent,
+    CommentsUploadComponent,
+    LectorBooksComponent,
+    LectorsCorrectionListComponent,
+    LectorBasedBookUpdateComponent,
+    PrintDecisionListComponent,
+    FinalCorrectionsComponent,
+    FinalCorrectionComponent,
     PlagiarismComplainsComponent,
     WriteNotesComponent,
     PlagiarismFinalDecisionComponent,
