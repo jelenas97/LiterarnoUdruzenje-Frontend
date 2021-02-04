@@ -4,6 +4,8 @@ import {RepositoryService} from '../services/repository/repository.service';
 import {UsersService} from '../services/users/users.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
+import {debounceTime, filter, switchMap} from 'rxjs/operators';
+import {of} from 'rxjs';
 
 
 interface SelectElement {
@@ -27,8 +29,7 @@ export class FormComponent implements OnInit {
   errorMessage = '';
   fieldProperties = [];
   processId: any;
-  angForm: any;
-  private cc: any;
+  angForm: FormGroup;
   bookForm = false;
   synopsisReview=false;
 
@@ -41,7 +42,6 @@ export class FormComponent implements OnInit {
              private bookService: BookService) {
 
     this.createForm();
-
     this.route.paramMap.subscribe(params => {
       this.processId = params.get('id');
 
@@ -57,7 +57,6 @@ export class FormComponent implements OnInit {
 
           this.formFields.forEach( (field) => {
 
-
             if(field.properties.minlength !== undefined && field.properties.maxlength !== undefined) {
               this.angForm.addControl(field.id, new FormControl('',Validators.compose([Validators.required,Validators.minLength(field.properties.minlength), Validators.maxLength(field.properties.maxlength)])));
             }
@@ -72,10 +71,13 @@ export class FormComponent implements OnInit {
 
             this.angForm.addControl(field.id, new FormControl('',Validators.required));
 
-            if (field.type.name === 'multiSelect' || field.type.name == 'enum') {
+            if (field.type.name === 'multiSelect' || field.type.name === 'enum') {
+              field.selectElements = [];
               Object.keys(field.type.values).forEach(value => {
-                this.selectElements.push({value: value, viewValue: field.type.values[value]});
+                field.selectElements.push({value: value, viewValue: field.type.values[value]});
               })
+
+              console.log(field.selectElements);
             }
           });
         },
@@ -92,7 +94,6 @@ export class FormComponent implements OnInit {
   }
 
   ngOnInit() {
-
   }
 
   onSubmit(value, form) {
@@ -170,7 +171,7 @@ export class FormComponent implements OnInit {
           alert(this.errorMessage);
         }
       );
-      
+
     }
 
   }

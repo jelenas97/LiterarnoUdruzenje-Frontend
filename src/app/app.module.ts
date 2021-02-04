@@ -23,11 +23,19 @@ import { SynopsesComponent } from './synopses/synopses.component';
 import { SynopsisReviewComponent } from './synopsis-review/synopsis-review.component';
 import { WholeBookRequestsComponent } from './whole-book-requests/whole-book-requests.component';
 import { BookSubmissionComponent } from './book-submission/book-submission.component';
+import {PlagiarismComplainsComponent} from './plagiarism-complains/plagiarism-complains.component';
+import {WriteNotesComponent} from './write-notes/write-notes.component';
+import {PlagiarismFinalDecisionComponent} from './plagiarism-final-decision/plagiarism-final-decision.component';
+import {AllPlagiarismsComponent} from './all-plagiarisms/all-plagiarisms.component';
 
 
 const Routes = [
   {
     path: 'registrate/:id',
+    component: FormComponent,
+  },
+  {
+    path: 'chooseEditors/:id',
     component: FormComponent,
   },
   {
@@ -56,7 +64,7 @@ const Routes = [
   },
   {
     path:'synopsisReview/:id',
-    component: SynopsisReviewComponent, 
+    component: SynopsisReviewComponent,
   },
   {
     path:'wholeBookRequests',
@@ -64,8 +72,28 @@ const Routes = [
   },
   {
     path:'bookSubmission/:id',
-    component: BookSubmissionComponent, 
-  }
+    component: BookSubmissionComponent,
+  },
+  {
+    path: 'plagiarism/:id',
+    component: FormComponent,
+  },
+  {
+    path: 'plagiarismComplains',
+    component: PlagiarismComplainsComponent,
+  },
+  {
+    path: 'writeNotes',
+    component: WriteNotesComponent,
+  },
+  {
+    path: 'plagiarisms',
+    component: AllPlagiarismsComponent,
+  },
+  {
+    path: 'plagiarismDecision/:id',
+    component: FormComponent,
+  },
 ];
 
 @NgModule({
@@ -81,7 +109,11 @@ const Routes = [
     SynopsesComponent,
     SynopsisReviewComponent,
     WholeBookRequestsComponent,
-    BookSubmissionComponent
+    BookSubmissionComponent,
+    PlagiarismComplainsComponent,
+    WriteNotesComponent,
+    PlagiarismFinalDecisionComponent,
+    AllPlagiarismsComponent
 
   ],
     imports: [

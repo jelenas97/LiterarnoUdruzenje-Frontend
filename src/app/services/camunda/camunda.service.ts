@@ -22,7 +22,16 @@ export class CamundaService {
     return this.httpClient.get<ProcessDto>(`http://localhost:8080/bookPublishing/startBookPublishing/`.concat(email));
   }
 
+  public startPlagiarismProcess(username: string) {
+    return this.httpClient.get<ProcessDto>('http://localhost:8080/plagiarism/startProcess/'.concat(username));
+  }
+
   getUserTasks(username: string) {
     return this.httpClient.get('http://localhost:8080/user/tasks/'.concat(username));
+  }
+
+  getNotes(processId: string) {
+    return this.httpClient.get('http://localhost:8080/plagiarism/notes/'.concat(processId)) as Observable<any>;
+
   }
 }

@@ -73,6 +73,14 @@ export class AppComponent {
     });
   }
 
+  startPlagiarismProcess() {
+    this.camundaService.startPlagiarismProcess(this.currUser.username).subscribe( data => {
+      this.processDto = data;
+      console.log(this.processDto);
+      this.router.navigate(['/plagiarism/' + this.processDto.processId]);
+    });
+  }
+
   set(){
     if(this.currUser?.roles.includes("WRITER")){
       this.unauthorized=false;
@@ -131,5 +139,17 @@ export class AppComponent {
 
   }
 
+  getPlagiarismComplains() {
+    this.router.navigate(['/plagiarismComplains']);
+
+  }
+
+  writeNotes() {
+    this.router.navigate(['/writeNotes']);
+  }
+
+  decideAboutPlagiarism() {
+    this.router.navigate(['/plagiarisms']);
+  }
 }
 
