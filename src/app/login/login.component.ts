@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AppComponent } from '../app.component';
 import { AuthService } from '../services/auth.service';
 import { User } from '../shared/model/user';
+import {NotifierService} from 'angular-notifier';
 
 @Component({
   selector: 'app-login',
@@ -11,31 +12,34 @@ import { User } from '../shared/model/user';
 })
 export class LoginComponent implements OnInit {
 
-currUser: User;
-user: User;
+  user: User;
+  currUser: User;
+  notifier: NotifierService;
 
   constructor(private authService: AuthService,private appComponent: AppComponent,
-    private router: Router) { 
-    this.currUser = new User();
+    private router: Router, private notifierService: NotifierService) {
     this.user = new User();
+    this.currUser = new User();
+    this.notifier = notifierService;
   }
 
   ngOnInit(){
   }
 
   onClickedLogin() {
-    
     console.log('Username:' + this.currUser.username + ' and password: ' + this.currUser.password);
-
       this.authService.login(this.currUser).subscribe(data2 => {
         this.currUser = this.authService.getCurrUser();
         this.appComponent.ngOnInit();
         this.router.navigate(['/homepage']);
-
       },
       error => {
-        alert('Incorrect email or password');
+        this.showNotification("error","Incorrect username or password")
       });
+  }
+
+  public showNotification(type: string, message: string): void {
+    this.notifier.notify(type, message);
   }
 
 }

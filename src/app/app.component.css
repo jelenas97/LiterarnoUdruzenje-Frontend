@@ -1,7 +1,5 @@
 .navbar button {
-    padding: 7px;
     font-size: 17px;
-    border-radius: 12px;
   }
 
 .navbar-buttons{
@@ -11,3 +9,4 @@
 .navbar-brand{
     float: right;
 }
+

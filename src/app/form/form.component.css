@@ -12,9 +12,10 @@ h1{
 
 .bg {
   background-image: url("../images/bg.jpg");
-  height: 150%;
+  height: 120vh;
   background-position: center;
-  background-repeat: no-repeat;
+  background-repeat: repeat;
+  background-size: cover;
   opacity: 0.75;
 
 }

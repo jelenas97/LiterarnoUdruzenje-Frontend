@@ -6,6 +6,7 @@ import {RepositoryService} from '../services/repository/repository.service';
 import {UsersService} from '../services/users/users.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
+import {NotifierService} from 'angular-notifier';
 
 
 interface SelectElement {
@@ -20,6 +21,7 @@ interface SelectElement {
 })
 export class FormComponent implements OnInit {
 
+  notifier: NotifierService;
   categories = [];
   formFieldsDto = null;
   formFields: any;
@@ -45,10 +47,10 @@ export class FormComponent implements OnInit {
 
   constructor(private userService: UsersService, private repositoryService: RepositoryService,
              private route: ActivatedRoute, private router: Router, private fb: FormBuilder,
-             private authService: AuthService, private camundaService: CamundaService) {
+             private notifierService: NotifierService) {
 
     this.createForm();
-
+    this.notifier = notifierService;
     this.route.paramMap.subscribe(params => {
       this.processId = params.get('id');
 
@@ -163,7 +165,7 @@ export class FormComponent implements OnInit {
       // @ts-ignore
       this.userService.registerUser(o, this.formFieldsDto.taskId).subscribe(
         res => {
-          alert('Your form is submitted successfully!');
+          this.showNotification("success", "Successfully saved data")
           if (this.redirect) {
             this.redirectTo('/registrate/' + this.processId);
           }else if (this.redirectFile) {
@@ -173,13 +175,13 @@ export class FormComponent implements OnInit {
           }else if (this.redirectChoose) {
             this.redirectTo('/chooseBetaReaders');
           } else {
-            this.router.navigate(['/homepage']);
+            this.router.navigate(['/login']);
           }
         },
         err => {
           this.errorMessage = err.error.message;
           console.log(err);
-          alert(this.errorMessage);
+          this.showNotification("error", "Some error occured");
         }
       );
 
@@ -196,5 +198,9 @@ export class FormComponent implements OnInit {
   redirectTo(uri: string){
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
       this.router.navigate([uri]));
+  }
+
+  public showNotification(type: string, message: string): void {
+    this.notifier.notify(type, message);
   }
 }
