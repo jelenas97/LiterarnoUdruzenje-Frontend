@@ -1,0 +1,18 @@
+<p>ODLUKA</p>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">Editor</th>
+    <th scope="col">Notes</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let note of notes" >
+    <td>{{note.editor}} </td>
+    <td>{{note.note}} </td>
+  </tr>
+  </tbody>
+
+
+</table>
+<app-form></app-form>

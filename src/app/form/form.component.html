@@ -14,16 +14,16 @@
     <input type="email" class="form-control " name={{field.id}}  formControlName={{field.id}} *ngIf="field.type.name=='string' && field.id=='email'" >
     <input type="password" class="form-control " name={{field.id}} formControlName={{field.id}} *ngIf="field.type.name=='string' && field.id=='password'" >
 
-    <mat-form-field appearance="fill" class="pt-4 pl-3" *ngIf="field.type.name == 'multiSelect'">
-      <mat-select multiple formControlName={{field.id}}>
-        <mat-option class="mt-0 pt-0" *ngFor="let element of selectElements" value={{element.value}}>
+    <mat-form-field appearance="fill" class="col-lg-12" *ngIf="field.type.name == 'multiSelect'">
+      <mat-select multiple class="col-lg-12" formControlName={{field.id}}>
+        <mat-option class="mt-0 pt-0" *ngFor="let element of field.selectElements" value={{element.value}}>
           {{element.viewValue}}
         </mat-option>
       </mat-select>
     </mat-form-field>
 
-    <select name={{field.id}} *ngIf="field.type.name=='enum'" formControlName={{field.id}}>
-      <option *ngFor="let val of selectElements" value={{val.value}}>
+    <select name={{field.id}} *ngIf="field.type.name=='enum'" class="form-control" formControlName={{field.id}}>
+      <option *ngFor="let val of field.selectElements" value={{val.value}}>
         {{val.viewValue}}
       </option>
     </select>
