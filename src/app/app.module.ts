@@ -42,6 +42,7 @@ import { LectorBasedBookUpdateComponent } from './lector-based-book-update/lecto
 import { PrintDecisionListComponent } from './print-decision-list/print-decision-list.component';
 import { FinalCorrectionsComponent } from './final-corrections/final-corrections.component';
 import { FinalCorrectionComponent } from './final-correction/final-correction.component';
+import {NotifierModule} from 'angular-notifier';
 
 
 const Routes = [
@@ -210,19 +211,20 @@ const Routes = [
     AllPlagiarismsComponent
 
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        FormsModule,
-        RouterModule.forRoot(Routes),
-        HttpClientModule,
-        ReactiveFormsModule,
-        MatSelectModule,
-        BrowserAnimationsModule,
-        HttpClientModule,
-        DemoMaterialModule,
-        MatInputModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    RouterModule.forRoot(Routes),
+    HttpClientModule,
+    ReactiveFormsModule,
+    MatSelectModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    DemoMaterialModule,
+    MatInputModule,
+    NotifierModule
+  ],
   providers: [ { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }, AuthService],
   entryComponents: [FormComponent],
   bootstrap: [AppComponent]

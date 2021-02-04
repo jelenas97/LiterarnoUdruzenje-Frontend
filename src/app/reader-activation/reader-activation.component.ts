@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UsersService} from '../services/users/users.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {NotifierService} from 'angular-notifier';
 
 @Component({
   selector: 'app-reader-activation',
@@ -10,8 +11,11 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class ReaderActivationComponent implements OnInit {
 
   private processId: any;
+  private notifier: NotifierService;
 
-  constructor(private userService: UsersService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private userService: UsersService, private route: ActivatedRoute, private notifierService: NotifierService) {
+    this.notifier = notifierService;
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -19,13 +23,16 @@ export class ReaderActivationComponent implements OnInit {
         const x = this.userService.activateUser(this.processId);
         x.subscribe(
           res => {
-            alert('Activation succeded');
+            this.showNotification("success","Activation is done successfully");
           });
       },
       err => {
-        alert('Activation failed');
+        this.showNotification("error", "Activation failed");
       }
     );
+  }
 
+  public showNotification(type: string, message: string): void {
+    this.notifier.notify(type, message);
   }
 }

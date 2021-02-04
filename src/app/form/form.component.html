@@ -1,6 +1,6 @@
 <div class="bg">
   <br><br>
-<form [formGroup]="angForm" #f="ngForm" (ngSubmit)="onSubmit(f.value, f)" class="white col-lg-4 offset-lg-4">
+<form [formGroup]="angForm" #f="ngForm" (ngSubmit)="onSubmit(f.value, f)" class="white col-lg-4 offset-lg-4 mt-5">
   <br>
   <div *ngFor="let field of formFields">
     <label class="mt-4">{{field.label}}</label>
