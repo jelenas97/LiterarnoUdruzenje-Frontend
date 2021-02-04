@@ -170,7 +170,7 @@ const Routes = [
     component: AllPlagiarismsComponent,
   },
   {
-    path: 'plagiarismDecision/:id',
+    path: 'plagiarismFinalDecision/:id',
     component: PlagiarismFinalDecisionComponent,
   },
 ];

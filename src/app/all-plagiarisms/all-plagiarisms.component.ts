@@ -37,6 +37,6 @@ export class AllPlagiarismsComponent implements OnInit {
   }
 
   finalDecision(task: string) {
-    this.router.navigate(['/plagiarismDecision/' + task]);
+    this.router.navigate(['/plagiarismFinalDecision/' + task]);
   }
 }
