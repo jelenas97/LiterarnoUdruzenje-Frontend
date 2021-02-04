@@ -175,13 +175,13 @@ export class FormComponent implements OnInit {
           }else if (this.redirectChoose) {
             this.redirectTo('/chooseBetaReaders');
           } else {
-            this.router.navigate(['/login']);
+            this.router.navigate(['/homepage']);
           }
         },
         err => {
           this.errorMessage = err.error.message;
           console.log(err);
-          this.showNotification("error", "Some error occured");
+          this.showNotification("error", err.error.message);
         }
       );
 
