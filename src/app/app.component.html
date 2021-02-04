@@ -1,14 +1,34 @@
-<div class="navbar navbar-light bg-dark">
-  <div class="navbar-buttons">
-    <button class="navbar-brand" *ngIf="unauthorized" (click)="startWriterRegistrationProcess()">Register as Writer</button>
-    <button class="navbar-brand" *ngIf="unauthorized" (click)="startReaderRegistrationProcess()">Register as Reader</button>
-    <button class="navbar-brand" *ngIf="unauthorized" routerLink="/login">Login</button>
-    <button class="navbar-brand" *ngIf = "boardMember"  (click)="getRequests()">Show requests</button>
-    <button class="navbar-brand" *ngIf = "!unauthorized"  (click)="logout()">Logout</button>
-    <button class="navbar-brand" *ngIf = "writer" (click)="startBookPublishingProcess()">Book publishing</button>
-    <button class="navbar-brand" *ngIf = "writer" (click)="showRequestsForWholeBook()">Requests for whole book</button>
-    <button class="navbar-brand" *ngIf = "editor" (click)="getSubmitedSynopses()">Show synopses</button>
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <notifier-container class="m-0 p-0"></notifier-container>
 
-  </div>
-</div>
+    <div class="col-lg-10 m-0 p-0">
+    <button class="btn btn-dark text-white border-0" *ngIf="unauthorized" (click)="startWriterRegistrationProcess()">Register as Writer</button>
+    <button class="btn btn-dark text-white border-0" *ngIf="unauthorized" (click)="startReaderRegistrationProcess()">Register as Reader</button>
+
+    <button class="btn btn-dark text-white border-0" *ngIf = "boardMember"  (click)="getRequests()">Show requests</button>
+      <button class="navbar-brand" *ngIf = "boardMember"  (click)="decideAboutPlagiarism()">Plagiarism</button>
+      <button class="btn btn-dark text-white border-0" *ngIf = "writer" (click)="startBookPublishingProcess()">Book publishing</button>
+    <button class="btn btn-dark text-white border-0" *ngIf = "writer" (click)="showRequestsForWholeBook()">Requests for whole book</button>
+    <button class="btn btn-dark text-white border-0" *ngIf = "writer" (click)="readCommentsAndChangeBook()">Read comments and change book</button>
+    <button class="btn btn-dark text-white border-0" *ngIf = "writer" (click)="lectorCorrections()">Lector corrections</button>
+    <button class="btn btn-dark text-white border-0" *ngIf = "writer" (click)="finalCorrections()">Final corrections</button>
+    <button class="btn btn-dark text-white border-0" *ngIf = "editor" (click)="getSubmitedSynopses()">Show synopses</button>
+    <button class="btn btn-dark text-white border-0" *ngIf = "editor" (click)="getDetectedPlagiarisms()">Plagiarism detection</button>
+    <button class="btn btn-dark text-white border-0" *ngIf = "editor" (click)="downloadList()">Download list</button>
+    <button class="btn btn-dark text-white border-0" *ngIf = "editor" (click)="askBetaReaders()">Ask beta-readers</button>
+    <button class="btn btn-dark text-white border-0" *ngIf = "editor" (click)="chooseBetaReaders()">Choose beta-readers</button>
+    <button class="btn btn-dark text-white border-0" *ngIf = "editor" (click)="printList()">Print list</button>
+    <button class="btn btn-dark text-white border-0" *ngIf = "betaReader" (click)="leaveComments()">Leave comments</button>
+    <button class="btn btn-dark text-white border-0" *ngIf = "lector" (click)="lectorBooks()">Lector books</button>
+      <button class="navbar-brand" *ngIf = "writer" (click)="startPlagiarismProcess()">Report plagiarism</button>
+      <button class="navbar-brand" *ngIf = "editor" (click)="getPlagiarismComplains()">Show plagiarism complains</button>
+      <button class="navbar-brand" *ngIf = "editor" (click)="writeNotes()">Write notes for plagiarisms</button>
+
+    </div>
+
+    <div class="col-lg-9 m-0 p-0">
+      <button class="btn btn-dark text-white pl-4 ml-5 pr-4" *ngIf = "!unauthorized"  (click)="logout()">Logout</button>
+      <button class="btn btn-dark text-white pl-4 ml-5 pr-4" *ngIf="unauthorized" routerLink="/login">Login</button>
+    </div>
+</nav>
 <router-outlet></router-outlet>

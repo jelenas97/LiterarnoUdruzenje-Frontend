@@ -13,20 +13,23 @@ export class SynopsesComponent implements OnInit {
 
   tasks: any;
   currUser: any;
-  synopses: any;
 
-  constructor(private camundaService: CamundaService, private router: Router, private authService: AuthService,
-     private repositoryService: RepositoryService) {
+  constructor(private camundaService: CamundaService, private router: Router, private authService: AuthService) {
     this.currUser=this.authService.getCurrUser().username;
    }
 
   ngOnInit(): void {
+    this.tasks= [];
     const x = this.camundaService.getUserTasks(this.currUser);
 
     x.subscribe(
       res => {
         console.log(res);
-        this.tasks = res;
+        for (const i in res){
+          if(res[i].name=='Review the book details'){
+            this.tasks.push(res[i]);
+          }
+        }
       },
       err => {
         console.log('Error occured');
@@ -34,8 +37,8 @@ export class SynopsesComponent implements OnInit {
     );
   }
 
-  synopsisReview(taskId: any) {
-    this.router.navigate(['/synopsisReview/' + taskId]);
+  synopsisReview(procesId: any) {
+    this.router.navigate(['/synopsisReview/' + procesId]);
 
   }
 }

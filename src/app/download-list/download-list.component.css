@@ -1,0 +1,15 @@
+h1{
+    margin-top: 30px;
+    margin-left: 40px;
+}
+
+table{
+    margin-top: 30px;
+    margin-left: 50px;
+    text-align: center;
+    width: 700px;
+}
+
+tr,th,td{
+    border: 1px solid;
+}

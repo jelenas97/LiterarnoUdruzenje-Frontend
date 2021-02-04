@@ -12,12 +12,14 @@ export class RequestsListComponent implements OnInit {
   tasks: any;
   currUser: any;
 
-  constructor(private camundaService: CamundaService, private router: Router, private authService: AuthService) { }
+  constructor(private camundaService: CamundaService, private router: Router, private authService: AuthService) {
+    this.currUser = this.authService.currUser;
+  }
+
 
   ngOnInit(): void {
 
     this.currUser = this.authService.currUser;
-
     const x = this.camundaService.getUserTasks(this.currUser.username);
 
     x.subscribe(

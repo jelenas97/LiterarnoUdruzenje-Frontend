@@ -1,9 +1,14 @@
+import { AuthService } from './../services/auth.service';
+import { CamundaService } from './../services/camunda/camunda.service';
 import { BookService } from './../services/bookService';
 import { Component, OnInit } from '@angular/core';
 import {RepositoryService} from '../services/repository/repository.service';
 import {UsersService} from '../services/users/users.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
+import {NotifierService} from 'angular-notifier';
+import {debounceTime, filter, switchMap} from 'rxjs/operators';
+import {of} from 'rxjs';
 
 
 interface SelectElement {
@@ -18,6 +23,7 @@ interface SelectElement {
 })
 export class FormComponent implements OnInit {
 
+  notifier: NotifierService;
   categories = [];
   formFieldsDto = null;
   formFields: any;
@@ -27,21 +33,25 @@ export class FormComponent implements OnInit {
   errorMessage = '';
   fieldProperties = [];
   processId: any;
-  angForm: any;
-  private cc: any;
+  angForm: FormGroup;
   bookForm = false;
   synopsisReview=false;
+  currUser: any;
 
   selectElements: SelectElement[] = [];
   selectedFiles: FileList | undefined;
   private redirect = false;
+  private redirectFile = false;
+  private redirectBeta = false;
+  private redirectChoose = false;
+  private onlyFiles = false;
 
   constructor(private userService: UsersService, private repositoryService: RepositoryService,
              private route: ActivatedRoute, private router: Router, private fb: FormBuilder,
-             private bookService: BookService) {
+             private notifierService: NotifierService) {
 
     this.createForm();
-
+    this.notifier = notifierService;
     this.route.paramMap.subscribe(params => {
       this.processId = params.get('id');
 
@@ -57,7 +67,6 @@ export class FormComponent implements OnInit {
 
           this.formFields.forEach( (field) => {
 
-
             if(field.properties.minlength !== undefined && field.properties.maxlength !== undefined) {
               this.angForm.addControl(field.id, new FormControl('',Validators.compose([Validators.required,Validators.minLength(field.properties.minlength), Validators.maxLength(field.properties.maxlength)])));
             }
@@ -72,9 +81,10 @@ export class FormComponent implements OnInit {
 
             this.angForm.addControl(field.id, new FormControl('',Validators.required));
 
-            if (field.type.name === 'multiSelect' || field.type.name == 'enum') {
+            if (field.type.name === 'multiSelect' || field.type.name === 'enum') {
+              field.selectElements = [];
               Object.keys(field.type.values).forEach(value => {
-                this.selectElements.push({value: value, viewValue: field.type.values[value]});
+                field.selectElements.push({value: value, viewValue: field.type.values[value]});
               })
             }
           });
@@ -92,28 +102,48 @@ export class FormComponent implements OnInit {
   }
 
   ngOnInit() {
-
   }
 
   onSubmit(value, form) {
     const o = new Array();
     const p = new FormData();
-    console.log(value);
-    console.log(form);
+
     for (const property in value) {
       console.log(property);
-      if(property==='decision'){
-        this.synopsisReview=true;
-      }
       if (property === 'betaReader'){
-        if (value[property] === true) {
+        if (value[property] === true ) {
           this.redirect = true;
         }
+      }
+      if( property==='original_decision'){
+        if(value[property]==='true'){
+          this.redirectFile= true;
+        }
+      }
+      if(property ==='decision'){
+        if(value[property]==='decline'){
+          this.redirect=true;
+        }
+      }
+      if(property ==='original_approval'){
+        if(value[property]==='true'){
+          this.redirectBeta=true;
+        }
+      }
+      if(property ==='wantBetaReaders'){
+        if(value[property]==='true'){
+          this.redirectChoose=true;
+        }
+      }
+      if(property === 'files' || property === "changedBook") {
+        this.onlyFiles = true;
       }
       if (value[property] instanceof Array) {
         o.push({fieldId: property, fieldValues: value[property]});
       } else if (property !== 'files') {
-        o.push({fieldId: property, fieldValue: value[property]});
+        if (property !== 'moreFiles') {
+          o.push({fieldId: property, fieldValue: value[property]});
+        }
       }
     }
     if (this.selectedFiles?.length !== 0 && this.selectedFiles !== undefined) {
@@ -124,53 +154,37 @@ export class FormComponent implements OnInit {
           this.router.navigate(['/']);
         },
         err => {
-
+          this.errorMessage = err.error.message;
+          console.log(err);
+          alert(this.errorMessage);
           alert('Files not uploaded successfully, try again!');
         }
       );
     }
-    for (const property in value) {
-      if(property==='title'){
-        this.bookForm=true;
-        this.bookService.saveBook(o, this.formFieldsDto.taskId).subscribe(
-          res=>{
-            alert('Your form is submitted successfully!');
-            this.redirectTo('/homepage');
-          }
-        )
-        break;
-      }
-    }
-    for (const property in value) {
-      if(property==='decision'){
-        this.synopsisReview=true;
-        this.bookService.decideOnSynopsis(o, this.formFieldsDto.taskId).subscribe(
-          res=>{
-            alert('Your form is submitted successfully!');
-            this.redirectTo('/homepage');
-          }
-        )
-        break;
-      }
-    }
-    if (o.length !== 0 &&  !this.bookForm && !this.synopsisReview) {
+    if (o.length !== 0 && !this.onlyFiles) {
       // @ts-ignore
       this.userService.registerUser(o, this.formFieldsDto.taskId).subscribe(
         res => {
-          alert('Your form is submitted successfully!');
+          this.showNotification("success", "Successfully saved data")
           if (this.redirect) {
             this.redirectTo('/registrate/' + this.processId);
+          }else if (this.redirectFile) {
+            this.redirectTo('/downloadList');
+          }else if (this.redirectBeta) {
+            this.redirectTo('/askBetaReaders');
+          }else if (this.redirectChoose) {
+            this.redirectTo('/chooseBetaReaders');
           } else {
-            this.router.navigate(['/']);
+            this.router.navigate(['/homepage']);
           }
         },
         err => {
           this.errorMessage = err.error.message;
           console.log(err);
-          alert(this.errorMessage);
+          this.showNotification("error", err.error.message);
         }
       );
-      
+
     }
 
   }
@@ -184,5 +198,9 @@ export class FormComponent implements OnInit {
   redirectTo(uri: string){
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
       this.router.navigate([uri]));
+  }
+
+  public showNotification(type: string, message: string): void {
+    this.notifier.notify(type, message);
   }
 }
