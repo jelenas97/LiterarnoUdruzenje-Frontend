@@ -92,7 +92,7 @@ const Routes = [
   },
   {
     path: 'plagiarismDecision/:id',
-    component: FormComponent,
+    component: PlagiarismFinalDecisionComponent,
   },
 ];
 

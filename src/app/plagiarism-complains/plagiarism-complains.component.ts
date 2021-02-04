@@ -25,7 +25,7 @@ export class PlagiarismComplainsComponent implements OnInit {
       res => {
         console.log(res);
         for (const i in res){
-          if(res[i].name=='Choose editors'){
+          if(res[i].name=='Choose editors' || res[i].name=='Choose replacement'){
             this.tasks.push(res[i]);
           }
         }
