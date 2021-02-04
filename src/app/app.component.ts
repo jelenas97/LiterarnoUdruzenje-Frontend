@@ -41,7 +41,6 @@ export class AppComponent {
       this.boardMember= false;
       this.writer= false;
       this.editor=false;
-      this.lector=false;
       //
     }else{
       if(this.currUser.roles!= null){
@@ -71,6 +70,14 @@ export class AppComponent {
       this.processDto = data;
       console.log(this.processDto);
       this.router.navigate(['/bookPublishing/' + this.processDto.processId]);
+    });
+  }
+
+  startPlagiarismProcess() {
+    this.camundaService.startPlagiarismProcess(this.currUser.username).subscribe( data => {
+      this.processDto = data;
+      console.log(this.processDto);
+      this.router.navigate(['/plagiarism/' + this.processDto.processId]);
     });
   }
 
@@ -184,6 +191,18 @@ export class AppComponent {
 
   finalCorrections(){
     this.router.navigate(['/finalCorrections']);
+  }
+  getPlagiarismComplains() {
+    this.router.navigate(['/plagiarismComplains']);
+
+  }
+
+  writeNotes() {
+    this.router.navigate(['/writeNotes']);
+  }
+
+  decideAboutPlagiarism() {
+    this.router.navigate(['/plagiarisms']);
   }
 }
 

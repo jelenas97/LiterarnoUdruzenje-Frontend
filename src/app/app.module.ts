@@ -23,6 +23,10 @@ import { SynopsesComponent } from './synopses/synopses.component';
 import { SynopsisReviewComponent } from './synopsis-review/synopsis-review.component';
 import { WholeBookRequestsComponent } from './whole-book-requests/whole-book-requests.component';
 import { BookSubmissionComponent } from './book-submission/book-submission.component';
+import {PlagiarismComplainsComponent} from './plagiarism-complains/plagiarism-complains.component';
+import {WriteNotesComponent} from './write-notes/write-notes.component';
+import {PlagiarismFinalDecisionComponent} from './plagiarism-final-decision/plagiarism-final-decision.component';
+import {AllPlagiarismsComponent} from './all-plagiarisms/all-plagiarisms.component';
 import { PlagiarismDecisionComponent } from './plagiarism-decision/plagiarism-decision.component';
 import { PlagiarismDetectionComponent } from './plagiarism-detection/plagiarism-detection.component';
 import { DownloadListComponent } from './download-list/download-list.component';
@@ -44,6 +48,10 @@ import {NotifierModule} from 'angular-notifier';
 const Routes = [
   {
     path: 'registrate/:id',
+    component: FormComponent,
+  },
+  {
+    path: 'chooseEditors/:id',
     component: FormComponent,
   },
   {
@@ -93,47 +101,79 @@ const Routes = [
   {
     path:'plagiarismDecision/:id',
     component: PlagiarismDecisionComponent,
-  },{
+  },
+  {
     path:'downloadAndDecide/:id',
     component: DownloadAndDecideComponent,
-  },{
+  },
+  {
     path:'downloadList',
     component: DownloadListComponent,
-  },{
+  },
+  {
     path:'askBetaReaders',
     component:AskBetaReadersComponent,
-  },{
+  },
+  {
     path:'chooseBetaReaders',
     component:ChooseBetaReadersComponent,
-  },{
+  },
+  {
     path:'leaveComments',
     component:LeaveCommentsComponent,
-  },{
+  },
+  {
     path:'changeBookComments',
     component:ChangeBookCommentsComponent,
-  },{
+  },
+  {
     path:'uploadByComments/:id',
     component: CommentsUploadComponent,
-  },{
+  },
+  {
     path:'lectorBooks',
     component:  LectorBooksComponent,
-  },{
+  },
+  {
     path:'lectorCorrections',
     component:  LectorsCorrectionListComponent,
-  },{
+  },
+  {
     path:'lectorCorrections/:id',
     component: LectorBasedBookUpdateComponent,
-  },{
+  },
+  {
     path:'printList',
     component: PrintDecisionListComponent,
-  },{
+  },
+  {
     path:'finalCorrections',
     component: FinalCorrectionsComponent,
-  },{
+  },
+  {
     path:'finalCorrections/:id',
     component: FinalCorrectionComponent,
-  }
-
+  },
+  {
+    path: 'plagiarism/:id',
+    component: FormComponent,
+  },
+  {
+    path: 'plagiarismComplains',
+    component: PlagiarismComplainsComponent,
+  },
+  {
+    path: 'writeNotes',
+    component: WriteNotesComponent,
+  },
+  {
+    path: 'plagiarisms',
+    component: AllPlagiarismsComponent,
+  },
+  {
+    path: 'plagiarismFinalDecision/:id',
+    component: PlagiarismFinalDecisionComponent,
+  },
 ];
 
 @NgModule({
@@ -164,7 +204,12 @@ const Routes = [
     LectorBasedBookUpdateComponent,
     PrintDecisionListComponent,
     FinalCorrectionsComponent,
-    FinalCorrectionComponent
+    FinalCorrectionComponent,
+    PlagiarismComplainsComponent,
+    WriteNotesComponent,
+    PlagiarismFinalDecisionComponent,
+    AllPlagiarismsComponent
+
   ],
   imports: [
     BrowserModule,

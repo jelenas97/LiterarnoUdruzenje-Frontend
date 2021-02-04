@@ -2,3 +2,14 @@ h1{
     margin-left: 40px;
     margin-top: 30px;
 }
+
+.style{
+    margin-top: 30px;
+    margin-left: 60px;
+    font-size: large;
+}
+
+li{
+    margin-left: 20px;
+    margin-bottom: 6px;
+}

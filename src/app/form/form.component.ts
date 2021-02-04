@@ -7,6 +7,8 @@ import {UsersService} from '../services/users/users.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NotifierService} from 'angular-notifier';
+import {debounceTime, filter, switchMap} from 'rxjs/operators';
+import {of} from 'rxjs';
 
 
 interface SelectElement {
@@ -31,8 +33,7 @@ export class FormComponent implements OnInit {
   errorMessage = '';
   fieldProperties = [];
   processId: any;
-  angForm: any;
-  private cc: any;
+  angForm: FormGroup;
   bookForm = false;
   synopsisReview=false;
   currUser: any;
@@ -66,7 +67,6 @@ export class FormComponent implements OnInit {
 
           this.formFields.forEach( (field) => {
 
-
             if(field.properties.minlength !== undefined && field.properties.maxlength !== undefined) {
               this.angForm.addControl(field.id, new FormControl('',Validators.compose([Validators.required,Validators.minLength(field.properties.minlength), Validators.maxLength(field.properties.maxlength)])));
             }
@@ -81,9 +81,10 @@ export class FormComponent implements OnInit {
 
             this.angForm.addControl(field.id, new FormControl('',Validators.required));
 
-            if (field.type.name === 'multiSelect' || field.type.name == 'enum') {
+            if (field.type.name === 'multiSelect' || field.type.name === 'enum') {
+              field.selectElements = [];
               Object.keys(field.type.values).forEach(value => {
-                this.selectElements.push({value: value, viewValue: field.type.values[value]});
+                field.selectElements.push({value: value, viewValue: field.type.values[value]});
               })
             }
           });
@@ -101,7 +102,6 @@ export class FormComponent implements OnInit {
   }
 
   ngOnInit() {
-
   }
 
   onSubmit(value, form) {
