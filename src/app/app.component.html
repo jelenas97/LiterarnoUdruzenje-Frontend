@@ -6,8 +6,8 @@
     <button class="btn btn-dark text-white border-0" *ngIf="unauthorized" (click)="startReaderRegistrationProcess()">Register as Reader</button>
 
     <button class="btn btn-dark text-white border-0" *ngIf = "boardMember"  (click)="getRequests()">Show requests</button>
-      <button class="navbar-brand" *ngIf = "boardMember"  (click)="decideAboutPlagiarism()">Plagiarism</button>
-      <button class="btn btn-dark text-white border-0" *ngIf = "writer" (click)="startBookPublishingProcess()">Book publishing</button>
+    <button class="btn btn-dark text-white border-0" *ngIf = "boardMember"  (click)="decideAboutPlagiarism()">Plagiarism</button>
+    <button class="btn btn-dark text-white border-0" *ngIf = "writer" (click)="startBookPublishingProcess()">Book publishing</button>
     <button class="btn btn-dark text-white border-0" *ngIf = "writer" (click)="showRequestsForWholeBook()">Requests for whole book</button>
     <button class="btn btn-dark text-white border-0" *ngIf = "writer" (click)="readCommentsAndChangeBook()">Read comments and change book</button>
     <button class="btn btn-dark text-white border-0" *ngIf = "writer" (click)="lectorCorrections()">Lector corrections</button>
@@ -20,9 +20,9 @@
     <button class="btn btn-dark text-white border-0" *ngIf = "editor" (click)="printList()">Print list</button>
     <button class="btn btn-dark text-white border-0" *ngIf = "betaReader" (click)="leaveComments()">Leave comments</button>
     <button class="btn btn-dark text-white border-0" *ngIf = "lector" (click)="lectorBooks()">Lector books</button>
-      <button class="navbar-brand" *ngIf = "writer" (click)="startPlagiarismProcess()">Report plagiarism</button>
-      <button class="navbar-brand" *ngIf = "editor" (click)="getPlagiarismComplains()">Show plagiarism complains</button>
-      <button class="navbar-brand" *ngIf = "editor" (click)="writeNotes()">Write notes for plagiarisms</button>
+    <button class="btn btn-dark text-white border-0" *ngIf = "writer" (click)="startPlagiarismProcess()">Report plagiarism</button>
+    <button class="btn btn-dark text-white border-0" *ngIf = "editor" (click)="getPlagiarismComplains()">Plagiarism complains</button>
+    <button class="btn btn-dark text-white border-0" *ngIf = "editor" (click)="writeNotes()">Write notes for plagiarisms</button>
 
     </div>
 

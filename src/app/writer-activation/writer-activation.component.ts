@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UsersService} from '../services/users/users.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {NotifierService} from 'angular-notifier';
 
 @Component({
   selector: 'app-writer-activation',
@@ -9,8 +10,10 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class WriterActivationComponent implements OnInit {
   private processId: any;
-
-  constructor(private userService: UsersService, private route: ActivatedRoute, private router: Router) { }
+  private notifier: NotifierService;
+  constructor(private userService: UsersService, private route: ActivatedRoute, private router: Router, private notifierService: NotifierService) {
+    this.notifier = notifierService;
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -18,7 +21,7 @@ export class WriterActivationComponent implements OnInit {
       const x = this.userService.activateUser(this.processId);
       x.subscribe(
         res => {
-          alert('Activation succeded');
+          this.showNotification("success","Successfully done activation");
           this.router.navigate(['/registrate/' + this.processId]);
         },
         err => {
@@ -29,4 +32,7 @@ export class WriterActivationComponent implements OnInit {
 
     }
 
+  public showNotification(type: string, message: string): void {
+    this.notifier.notify(type, message);
+  }
 }

@@ -1,12 +1,12 @@
-<table class="table table-striped">
+<table class="table col-lg-8 offset-2 table-hover mt-5">
     <thead>
       <tr>
-        <th scope="col">Task name</th>
-        <th scope="col">Task assignee</th>
+        <th scope="col">Name</th>
+        <th scope="col">Assignee</th>
         <th scope="col">Book title</th>
         <th scope="col">Book writer</th>
         <th scope="col">Creation date</th>
-        <th scope="col"></th>
+        <th scope="col">Review</th>
       </tr>
     </thead>
     <tbody>
@@ -16,9 +16,7 @@
         <td>{{task.variables.title}}</td>
         <td>{{task.variables.processWriter}}</td>
         <td>{{task.dateTime}} </td>
-        <td><button class="btn btn-info" (click)="synopsisReview(task.variables.piId)">Review</button></td>
+        <td><button class="btn btn-success" (click)="synopsisReview(task.variables.piId)">Review</button></td>
       </tr>
     </tbody>
-  
-  
   </table>

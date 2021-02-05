@@ -18,6 +18,8 @@ export class RequestsListComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    this.currUser = this.authService.currUser;
     const x = this.camundaService.getUserTasks(this.currUser.username);
 
     x.subscribe(

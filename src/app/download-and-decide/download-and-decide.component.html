@@ -1,18 +1,12 @@
-<div style="width: 50%">
-    <table class="table table-striped">
-      <thead>
-      <tr>
-        <th scope="col">Book</th>
-        <th scope="col"></th>
+<table class="table col-lg-4 offset-lg-4">
+  <tbody>
+  <tr *ngFor="let filename of files">
+    <td><p class="pt-2">{{filename}}</p></td>
+    <td class="text-right">
+      <button class="btn btn-sm btn-success" (click)="download(filename)">Download and view</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
 
-      </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let filename of files" >
-          <td>{{filename}} </td>
-          <td><button class="btn btn-success" (click)="download(filename)">Download and view</button></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <app-form></app-form>
+<app-form></app-form>

@@ -1,20 +1,20 @@
-<table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">Task name</th>
-        <th scope="col">Task assignee</th>
-        <th scope="col">Creation date</th>
-        <th scope="col"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let task of tasks" >
-        <td>{{task.name}} </td>
-        <td>{{task.assignee}} </td>
-        <td>{{task.dateTime}} </td>
-        <td><button class="btn btn-info" (click)="pickBetaReaders(task.variables.piId)">Review</button></td>
-      </tr>
-    </tbody>
-  
-  
-  </table>
+<table class="table table-hover col-lg-6 offset-lg-3 mt-5">
+  <thead>
+  <tr>
+    <th scope="col">Name</th>
+    <th scope="col">Assignee</th>
+    <th scope="col">Creation date</th>
+    <th scope="col" class="text-right">Review</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let task of tasks">
+    <td>{{task.name}} </td>
+    <td>{{task.assignee}} </td>
+    <td>{{task.dateTime}} </td>
+    <td class="text-right">
+      <button class="btn btn-success" (click)="pickBetaReaders(task.variables.piId)">Review</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
