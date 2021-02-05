@@ -25,7 +25,11 @@ export class FinalCorrectionComponent implements OnInit {
       const x = this.camundaService.getEditorSuggestions(this.processId);
       x.subscribe(
         res => {
-          this.corrections = res[0].fieldValue;
+          for (const i in res){
+            if (res[i].fieldId === 'suggestion'){
+              this.corrections = res[i].fieldValue;
+            }
+          }
         },
         err => {
           console.log('Error occured');

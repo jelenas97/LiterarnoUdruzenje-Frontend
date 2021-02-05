@@ -24,8 +24,11 @@ export class RequestsListComponent implements OnInit {
 
     x.subscribe(
       res => {
-        console.log(res);
-        this.tasks = res;
+        for (const i in res){
+          if(res[i].name!=='Plagiarism decision'){
+            this.tasks.push(res[i]);
+          }
+        }
       },
       err => {
         console.log('Error occured');
