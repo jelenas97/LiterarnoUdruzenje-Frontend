@@ -1,0 +1,12 @@
+.navbar button {
+    font-size: 17px;
+  }
+
+.navbar-buttons{
+ width: 100%;
+}
+
+.navbar-brand{
+    float: right;
+}
+

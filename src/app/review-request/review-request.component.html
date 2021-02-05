@@ -1,0 +1,19 @@
+<table class="table col-lg-6 offset-lg-3 table-hover">
+  <thead>
+  <tr>
+    <th scope="col">File name</th>
+    <th scope="col" class="text-right">Download and view</th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let filename of files">
+    <td>{{filename}} </td>
+    <td class="text-right">
+      <button class="btn btn-success" (click)="download(filename)">Download and view</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<app-form></app-form>

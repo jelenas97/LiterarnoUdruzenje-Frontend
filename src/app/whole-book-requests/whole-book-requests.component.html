@@ -1,0 +1,25 @@
+<table class="table col-lg-8 offset-lg-2 table-hover mt-5">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Assignee</th>
+        <th scope="col">Creation date</th>
+        <th scope="col">Book title</th>
+        <th scope="col">Editor</th>
+        <th scope="col" class="text-right">Submission form</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of tasks" >
+        <td>{{task.name}} </td>
+        <td>{{task.assignee}} </td>
+        <td>{{task.dateTime}} </td>
+        <td>{{task.variables.title}}</td>
+        <td>{{task.variables.chiefEditor}}</td>
+        <td class="text-right"><button class="btn btn-success" (click)="showSubmissionForm(task.taskId)">Submisson form</button></td>
+      </tr>
+    </tbody>
+
+
+  </table>
+

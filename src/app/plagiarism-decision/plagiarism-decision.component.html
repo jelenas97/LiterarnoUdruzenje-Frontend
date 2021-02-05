@@ -1,0 +1,14 @@
+<div class="style row col-lg-12">
+  <div class="col-lg-4 text-right pt-3">
+    <p><b>Book title:</b> {{bookDetails.title}}</p>
+  </div>
+  <div class="col-lg-4 text-center pt-3">
+    <p><b>Writer:</b> {{bookDetails.writer}}</p>
+  </div>
+  <div class="col-lg-4 text-left pt-3">
+    <b>Detected plagiarisms:</b>
+  <br>
+  <li *ngFor="let book of plagiarisms">{{book}}</li>
+  </div>
+</div>
+<app-form></app-form>

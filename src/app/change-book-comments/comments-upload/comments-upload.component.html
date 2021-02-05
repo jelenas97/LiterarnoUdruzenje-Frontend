@@ -1,0 +1,16 @@
+<table class="table col-lg-6 offset-lg-3 ">
+  <thead>
+  <tr>
+    <th scope="col">Commenter</th>
+    <th scope="col">Comment</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let comment of comments" >
+    <td>{{comment.commenter}} </td>
+    <td>{{comment.comment}} </td>
+  </tr>
+  </tbody>
+</table>
+
+<app-form></app-form>

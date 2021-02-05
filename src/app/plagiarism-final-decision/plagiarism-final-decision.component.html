@@ -1,0 +1,15 @@
+<table class="table table-hover col-lg-6 offset-lg-3">
+  <thead>
+  <tr>
+    <th scope="col">Editor</th>
+    <th scope="col">Notes</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let note of notes" >
+    <td>{{note.editor}} </td>
+    <td>{{note.note}} </td>
+  </tr>
+  </tbody>
+</table>
+<app-form></app-form>

@@ -1,0 +1,12 @@
+<table class="table col-lg-4 offset-lg-4">
+  <tbody>
+  <tr *ngFor="let filename of files">
+    <td><p class="pt-2">{{filename}}</p></td>
+    <td class="text-right">
+      <button class="btn btn-sm btn-success" (click)="download(filename)">Download and view</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<app-form></app-form>
