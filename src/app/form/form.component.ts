@@ -150,14 +150,11 @@ export class FormComponent implements OnInit {
       // @ts-ignore
       this.userService.upload(this.selectedFiles, this.formFieldsDto.taskId).subscribe(
         res => {
-          alert('Files uploaded successfully!');
+          this.showNotification("success","Successfully uploaded files");
           this.router.navigate(['/']);
         },
         err => {
-          this.errorMessage = err.error.message;
-          console.log(err);
-          alert(this.errorMessage);
-          alert('Files not uploaded successfully, try again!');
+          this.showNotification("error",'Files not uploaded successfully, try again!');
         }
       );
     }

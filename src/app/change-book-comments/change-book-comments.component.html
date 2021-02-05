@@ -1,10 +1,10 @@
-<table class="table table-striped">
+<table class="table col-lg-6 offset-lg-3 mt-5">
   <thead>
   <tr>
-    <th scope="col">Task name</th>
-    <th scope="col">Task assignee</th>
+    <th scope="col">Name</th>
+    <th scope="col">Assignee</th>
     <th scope="col">Creation date</th>
-    <th scope="col"></th>
+    <th scope="col" class="text-right">Review</th>
   </tr>
   </thead>
   <tbody>
@@ -12,9 +12,7 @@
     <td>{{task.name}} </td>
     <td>{{task.assignee}} </td>
     <td>{{task.dateTime}} </td>
-    <td><button class="btn btn-info" (click)="changeBook(task.variables.piId)">Review</button></td>
+    <td class="text-right"><button class="btn btn-success" (click)="changeBook(task.variables.piId)">Review</button></td>
   </tr>
   </tbody>
-
-
 </table>
