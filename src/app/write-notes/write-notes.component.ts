@@ -37,6 +37,6 @@ export class WriteNotesComponent implements OnInit {
   }
 
   writeNotes(task: string) {
-    this.router.navigate(['/chooseEditors/' + task]);
+    this.router.navigate(['/writeNotes/' + task]);
   }
 }

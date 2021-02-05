@@ -135,7 +135,8 @@ export class FormComponent implements OnInit {
           this.redirectChoose=true;
         }
       }
-      if(property === 'files' || property === "changedBook") {
+      if(property === 'files' || property === "changedBook" || property === "moreFiles"
+        || property === "updatedBookAfterLectorsCorrection"|| property === "changeAfterSuggestion") {
         this.onlyFiles = true;
       }
       if (value[property] instanceof Array) {

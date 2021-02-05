@@ -33,4 +33,10 @@ export class UsersService {
     }
     return this.httpClient.post('http://localhost:8080/registration/uploadFile/'.concat(processId), formData) as Observable<any>;
   }
+
+  downloadFromFilename(name: any, taskId: string) {
+    return this.httpClient
+      // tslint:disable-next-line:max-line-length
+      .get('http://localhost:8080/registration/downloadFromSystem/'.concat(name).concat('?taskId=').concat(taskId), { responseType: 'blob' });
+  }
 }

@@ -43,6 +43,7 @@ import { PrintDecisionListComponent } from './print-decision-list/print-decision
 import { FinalCorrectionsComponent } from './final-corrections/final-corrections.component';
 import { FinalCorrectionComponent } from './final-correction/final-correction.component';
 import {NotifierModule} from 'angular-notifier';
+import {WriteNoteDownloadComponent} from './write-notes/write-note-download/write-note-download.component';
 
 
 const Routes = [
@@ -167,6 +168,10 @@ const Routes = [
     component: WriteNotesComponent,
   },
   {
+    path: 'writeNotes/:id',
+    component: WriteNoteDownloadComponent,
+  },
+  {
     path: 'plagiarisms',
     component: AllPlagiarismsComponent,
   },
@@ -208,7 +213,8 @@ const Routes = [
     PlagiarismComplainsComponent,
     WriteNotesComponent,
     PlagiarismFinalDecisionComponent,
-    AllPlagiarismsComponent
+    AllPlagiarismsComponent,
+    WriteNoteDownloadComponent
 
   ],
   imports: [

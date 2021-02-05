@@ -1,0 +1,25 @@
+<div style="width: 50%">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">File name</th>
+      <th scope="col"></th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr >
+      <td>Original book</td>
+      <td>{{files.original}} </td>
+      <td><button class="btn btn-success" (click)="download(files.original)">Download and view</button></td>
+    </tr>
+    <tr >
+      <td>Plagiarism book</td>
+      <td>{{files.plagiarism}} </td>
+      <td><button class="btn btn-success" (click)="download(files.plagiarism)">Download and view</button></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<app-form></app-form>

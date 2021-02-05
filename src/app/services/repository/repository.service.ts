@@ -43,4 +43,9 @@ export class RepositoryService {
     return this.httpClient.get('http://localhost:8080/bookPublishing/get/'.concat(processId)) as Observable<any>;
 
   }
+
+  getFileNamesPlagiarism(taskId: string) {
+    return this.httpClient.get('http://localhost:8080/registration/filesPlagiarism/'.concat(taskId)) as Observable<any>;
+
+  }
 }
